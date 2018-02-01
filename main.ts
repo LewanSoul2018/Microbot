@@ -194,8 +194,10 @@ namespace microbot {
 */
 //% weight=92 blockId=Sound block="Sound volume"
 	export function getSoundVolume(): number {
+	uBit.display.enable(false);	
         let volume = pins.analogReadPin(AnalogPin.P1);
         volume = mapRGB(volume, 0, 1023, 0, 255);
+        uBit.display.enable(true);
   	    return volume;
 	}	
 	
