@@ -160,7 +160,7 @@ namespace microbot {
 	   buf[0] = 0x55;
 	   buf[1] = 0x55;
 	   buf[2] = 0x08;
-	   buf[3] = 0x03;//cmd type
+	   buf[3] = 0x35;//cmd type
 	   buf[4] = 0x01;
 	   buf[5] = duration & 0xff;
 	   buf[6] = (duration >> 8) & 0xff;
