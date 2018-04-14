@@ -1,6 +1,7 @@
 {
 	"microbot.microbotInit|block": "初始化Microbot",
 	"microbot.setServo|block": "设置舵机|编号 %index|角度 %angle|运行时间 %duration",
+	"microbot.setBusServo|block": "设置总线舵机|编号 %index|角度 %angle|运行时间 %duration",
 	"microbot.setMotorSpeed|block": "设置电机1速度|%speed1|和电机2|速度 %speed2",
 	"microbot.Ultrasonic|block": "超声波检测到障碍物距离(厘米)",
 	"microbot.getSoundVolume|block": "音量大小",

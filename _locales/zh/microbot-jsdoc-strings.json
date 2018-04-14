@@ -1,6 +1,7 @@
 {
 	"microbot.microbotInit":"Microbot板初始化，请在开机时执行",
 	"microbot.setServo":"设置1到8号舵机角度，角度范围0~180",
+	"microbot.setBusServo":"设置1到8号总线舵机角度，角度范围0~240",
 	"microbot.setMotorSpeed":"设置马达1和马达2的速度，速度范围-100到100，可控制坦克车行进和转弯",
 	"microbot.Ultrasonic":"获取超声波检测到障碍物的距离",
 	"microbot.getSoundVolume":"获取声音传感器检测到的音量等级，范围0到255",

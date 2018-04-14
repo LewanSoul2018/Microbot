@@ -143,6 +143,33 @@ namespace microbot {
 	   serial.writeBuffer(buf);
 }
 
+
+/**
+* Set the angle of bus servo 1 to 8, range of 0~240 degree
+*/
+//% weight=97 blockId=setBusServo block="Set bus servo|index %index|angle %angle|duration %duration"
+//% angle.min=0 angle.max=240
+    export function setBusServo(index: number, angle: number, duration: number) {
+        if (angle > 240 || angle < 0)
+        {
+            return; 
+        }    
+        let position = mapRGB(angle, 0, 240, 0, 1000);
+       
+	   let buf = pins.createBuffer(10);
+	   buf[0] = 0x55;
+	   buf[1] = 0x55;
+	   buf[2] = 0x08;
+	   buf[3] = 0x03;//cmd type
+	   buf[4] = 0x01;
+	   buf[5] = duration & 0xff;
+	   buf[6] = (duration >> 8) & 0xff;
+	   buf[7] = index;
+	   buf[8] = position & 0xff;
+	   buf[9] = (position >> 8) & 0xff;
+	   serial.writeBuffer(buf);
+}
+
 /**
 *	Set the speed of the number 1 motor and number 2 motor, range of -100~100, that can control the tank to go advance or turn of.
 */
