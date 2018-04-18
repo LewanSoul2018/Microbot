@@ -874,7 +874,7 @@ namespace microbot {
      * Resolve the parameters that the handle's commands.
      */
     //% weight=58  blockId=getHandleArgs block="Get handle command|%str|argument at %index"
-    //% index.min=1
+    //% index.min=1 index.max=7
     export function getHandleArgs(str: string,index: number): number {
         let cmdType = analyzeHandleCmd(str);
         let returnValue: number = 0;
