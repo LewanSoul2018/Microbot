@@ -892,21 +892,21 @@ namespace microbot {
                 endIndex = strIndexOf("str","|", startIndex + 1);
                 if (endIndex == -1)
                 {
-                    return -1;
+                    return -2;
                 }    
                 valuStr = str.substr(startIndex + 1, endIndex - startIndex - 1);
                 startIndex = endIndex;
             }
             if (!checkArgsInt(valuStr))
             {
-                return -1;
+                return -3;
             } 
             let arg = parseInt(valuStr);
             return arg;
         }     
         else
         {
-            return -1;
+            return -4;
         }  
     }
    
