@@ -39,7 +39,7 @@
 	"RGBColors.White|block":"白色",
 	"microbot.analyzeBluetoothCmd|block":"获取蓝牙命令类型 %str",
 	"microbot.getArgs|block":"获取蓝牙命令|%str|参数 %index",
-	"microbot.getCmdtype|block":"蓝牙命令类型 %type",
+	"microbot.getBluetoothCmdtype|block":"蓝牙命令类型 %type",
 	"microbot.getRunCarTypeget|block":"车辆行进命令类型 %type",
 	"microbot.CmdType.NO_COMMAND|block":"无效的命令",
 	"microbot.CmdType.CAR_RUN|block":"车辆行进命令",

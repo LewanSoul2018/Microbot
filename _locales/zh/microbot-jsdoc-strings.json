@@ -14,7 +14,7 @@
 	"microbot.checkCurrentColor":"颜色传感器获取颜色值，必须先校正白色和黑色方可执行",
 	"microbot.analyzeBluetoothCmd":"解析手机APP发送的蓝牙命令类型，一共有9种命令类型：坦克车行进命令，舵机调试命令，获取超声波距离命令，获取温度命令，获取声音大小等级命令，获取光线等级命令，设置彩灯颜色命令，鸣笛命令，固件版本信息命令",
 	"microbot.getArgs":"解析手机App发送的命令参数，舵机调试命令有3个参数，其余都只有一个参数",
-	"microbot.getCmdtype":"枚举蓝牙命令类型",
+	"microbot.getBluetoothCmdtype":"枚举蓝牙命令类型",
 	"microbot.getRunCarTypeget":"获取坦克车行进命令类型，有停止、前进、后退、左转、右转、慢速前进，慢速左转，慢速右转",
 	"microbot.convertUltrasonic":"转换超声波障碍物距离为标准命令，发送到手机端，APP会显示超声波障碍物距离",
 	"microbot.convertTemperature":"转换温度值为标准命令，发送到手机端，APP会显示当前温度",
