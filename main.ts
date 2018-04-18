@@ -71,6 +71,21 @@ namespace microbot {
         //% block="Read firmware version"
         VERSION = 10
     }
+    
+    export enum HandleCmdType {
+        //% block="Invalid command"
+        NO_COMMAND = 0,
+        //% block="key status change"
+        KEY_CHANGE = 11,
+        //% block="joystick"
+        JOYSTICK = 12,
+        //% block="light,sound,knob"
+        LSK = 13,
+        //% block="ultrasonic"
+        ULTRASONIC = 14,
+        //% block="battery"
+        BATTERY = 15
+    }
 
     export enum CarRunCmdType {
         //% block="Stop"
@@ -91,6 +106,17 @@ namespace microbot {
         TURN_RIGHT_SLOW,
         //% block="Invalid command"
         COMMAND_ERRO
+    }
+
+    export enum KeyStatusType {
+        //% block="normal"
+        NORMAL,
+        //% block="press"
+        PRESS,
+        //% block="hold"
+        HOLD,
+        //% block=""release
+        RELEASE
     }
 
 
@@ -712,7 +738,7 @@ namespace microbot {
     }
 
     /**
-     * Resolve the parameters tha the phone APP send the command,there are 3 parameters of servo debug command,the other command has just one parameter.
+     * Resolve the parameters that the phone APP send the command,there are 3 parameters of servo debug command,the other command has just one parameter.
      */
     //% weight=70  blockId=getArgs block="Get bluetooth command|%str|argument at %index"
     //% index.min=1 index.max=3
@@ -759,8 +785,8 @@ namespace microbot {
     /**
      * Returns the enumeration of the command type, which can be compared with this module after obtaining the bluetooth command type sent by the mobile phone APP.
      */
-    //% weight=68 blockId=getCmdtype block="Bluetooth command type %type"
-    export function getCmdtype(type: CmdType): number {
+    //% weight=68 blockId=getBluetoothCmdtype block="Bluetooth command type %type"
+    export function getBluetoothCmdtype(type: CmdType): number {
         return type;
     }
 
@@ -797,19 +823,127 @@ namespace microbot {
     /**
      * Convert the light value is the standard command and send it to the mobile phone. The APP displays the current light level (0~255).
      */
-    //% weight=60 blockId=convertLight block="Convert light %data"
+    //% weight=60 blockGap=50 blockId=convertLight block="Convert light %data"
     export function convertLight(data: number): string {
         let cmdStr: string = "CMD|06|";
         cmdStr += data.toString();
         cmdStr += "|$";
         return cmdStr;
     }
+    
+    
+      /**
+     * Resolve the microbot handle command type, the total of 5 types of commands:Key status,joystick,light & sound & knob,ultrasonic,voltage.
+     */
+    //% weight=59 blockId=analyzeHandleCmd block="Get handle command type %str"
+    export function analyzeHandleCmd(str: string): number {
+        if (str.length > 9)
+        {
+            let cmdHead = str.substr(0, 3);
+            
+            if (cmdHead == "CMD")
+            {
+                let cmdTypeStr: string = str.substr(4, 2);
+                if (!checkArgsInt(cmdTypeStr))
+                {
+                    return HandleCmdType.NO_COMMAND;
+                }    
+                let cmdType = parseInt(cmdTypeStr);
 
+                if (cmdType > HandleCmdType.BATTERY || cmdType < 0)
+                {
+                    return HandleCmdType.NO_COMMAND; 
+                } 
+                else
+                {
+                    return cmdType;
+                }    
+            }
+            else
+            {
+                return HandleCmdType.NO_COMMAND; 
+            }    
+        }   
+        else
+        {
+            return HandleCmdType.NO_COMMAND;
+        }    
+    }
+    
+    
+  /**
+     * Resolve the parameters that the handle's commands.
+     */
+    //% weight=58  blockId=getHandleArgs block="Get handle command|%str|argument at %index"
+    //% index.min=1
+    export function getHandleArgs(str: string,index: number): number {
+        let cmdType = analyzeHandleCmd(str);
+        let returnValue: number = 0;
+        if (cmdType == HandleCmdType.NO_COMMAND)
+        {
+            return -1;
+        }    
+        if (cmdType <= HandleCmdType.BATTERY && cmdType >= HandleCmdType.KEY_CHANGE)
+        {
+            let startIndex = 5;
+            let endIndex = startIndex;
+            let valuStr: string
+            startIndex = str.indexOf("|", startIndex);
+            for (let i = 0; i < index; i++)
+            {
+                endIndex = str.indexOf("|", startIndex + 1);
+                if (endIndex == -1)
+                {
+                    return -1;
+                }    
+                valuStr = str.substring(startIndex + 1, endIndex - 1);
+                startIndex = endIndex;
+            }
+            if (!checkArgsInt(valuStr))
+            {
+                return -1;
+            } 
+            let arg = parseInt(valuStr);
+            return arg;
+        }     
+        else
+        {
+            return -1;
+        }    
+    }
+
+    /**
+     * Returns the enumeration of the handle command type.
+     */
+    //% weight=57 blockId=getHandleCmdtype block="Handle command type %type"
+    export function getHandleCmdtype(type: HandleCmdType): number {
+        return type;
+    }
+
+    /**
+     * Returns the invalid parameter.
+     */
+    //% weight=56 blockId=getInValidArgs block="Get invalid parameter"
+    export function getInValidArgs(): number {
+        return -1;
+    }
+
+    /**
+     * Returns the enumeration of the key status type.
+     */
+    //% weight=55 blockId=getKeyStatustype block="Key status type %type"
+    export function getKeyStatustype(type: KeyStatusType): number {
+        return type;
+    }
+
+    
     /**
      *  The Melody of Little star   
      */
-    //% weight=58 blockId=littleStarMelody block="Little star melody"
+    //% weight=54 blockId=littleStarMelody block="Little star melody"
     export function littleStarMelody(): string[] {
         return ["C4:4", "C4:4", "G4:4", "G4:4", "A4:4", "A4:4", "G4:4", "F4:4", "F4:4", "E4:4", "E4:4", "D4:4", "D4:4", "C4:4", "G4:4", "G4:4", "F4:4", "F4:4", "E4:4", "E4:4", "D4:4", "G4:4", "G4:4", "F4:4", "F4:4", "E4:4", "E4:4", "D4:4", "C4:4", "C4:4", "G4:4", "G4:4", "A4:4", "A4:4", "G4:4", "F4:4", "F4:4", "E4:4", "E4:4", "D4:4", "D4:4", "C4:4"];
     }
+    
+    
 }

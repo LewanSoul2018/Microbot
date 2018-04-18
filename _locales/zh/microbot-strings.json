@@ -18,6 +18,12 @@
 	"microbot.Colors.Red|block":"红色",
 	"microbot.Colors.Green|block":"绿色",
 	"microbot.Colors.Blue|block":"蓝色",
+	"microbot.HandleCmdType.NO_COMMAND|block":"无效的命令",
+	"microbot.HandleCmdType.KEY_CHANGE|block":"按键状态改变",
+	"microbot.HandleCmdType.JOYSTICK|block":"摇杆数据",
+	"microbot.HandleCmdType.LSK|block":"声音、光线、旋钮数据",
+	"microbot.HandleCmdType.ULTRASONIC|block":"超声波障碍物距离",
+	"microbot.HandleCmdType.BATTERY|block":"电池电量",
 	"microbot.LineFollower.S1_IN_S2_IN|block":"传感器1和传感器2在黑线内",
 	"microbot.LineFollower.S1_IN_S2_OUT|block":"传感器1在黑线内，传感器2在黑线外",
 	"microbot.LineFollower.S1_OUT_S2_IN|block":"传感器1在黑线外，传感器2在黑线内",
@@ -62,5 +68,14 @@
 	"microbot.convertBattery|block":"转换电量命令 %data",
 	"microbot.littleStarMelody|block":"小星星旋律",
 	"microbot.SendType.NoDelaySend|block":"立即设置",
-	"microbot.SendType.DelaySend|block":"延时设置"
+	"microbot.SendType.DelaySend|block":"延时设置",
+	"microbot.analyzeHandleCmd|block":"获取手柄命令类型 %str",
+	"microbot.getHandleArgs|block":"获取手柄命令|%str|参数 %index",
+	"microbot.getHandleCmdtype|block":"手柄命令类型 %type",
+	"microbot.getInValidArgs|block":"无效的参数",
+	"microbot.KeyStatusType.NORMAL|block":"按键未按下",
+	"microbot.KeyStatusType.PRESS|block":"按键按下",
+	"microbot.KeyStatusType.HOLD|block":"按键长按",
+	"microbot.KeyStatusType.RELEASE|block":"按键放开",
+	"microbot.getKeyStatustype|block":"按键状态 %type"
 }
