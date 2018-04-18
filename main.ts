@@ -887,7 +887,7 @@ namespace microbot {
         {
             let startIndex = 5;
             let endIndex = startIndex;
-            let valuStr: string
+            let valuStr: string;
             startIndex = str.indexOf("|", startIndex);
             for (let i = 0; i < index; i++)
             {
