@@ -870,7 +870,46 @@ namespace microbot {
         }    
     }
     
-    
+     /**
+     * Resolve the parameters that the handle's commands.
+     */
+    //% weight=58  blockId=getHandleArgs block="Get handle command|%str|argument at %index"
+    //% index.min=1
+    export function getHandleArgs(str: string,index: number): number {
+        let cmdType = analyzeHandleCmd(str);
+        let returnValue: number = 0;
+        if (cmdType == HandleCmdType.NO_COMMAND)
+        {
+            return -1;
+        }    
+        if (cmdType <= HandleCmdType.BATTERY && cmdType >= HandleCmdType.KEY_CHANGE)
+        {
+            let startIndex = 5;
+            let endIndex = startIndex;
+            let valuStr: string;
+            startIndex = str.indexOf("|", startIndex);
+            for (let i = 0; i < index; i++)
+            {
+                endIndex = str.indexOf("|", startIndex + 1);
+                if (endIndex == -1)
+                {
+                    return -1;
+                }    
+                valuStr = str.substring(startIndex + 1, endIndex - 1);
+                startIndex = endIndex;
+            }
+            if (!checkArgsInt(valuStr))
+            {
+                return -1;
+            } 
+            let arg = parseInt(valuStr);
+            return arg;
+        }     
+        else
+        {
+            return -1;
+        }    
+    }
  
 
     /**
