@@ -21,7 +21,7 @@ namespace microbot {
         //% blockId="Green" block="Green"
         Green = 0x02,
         //% blockId="Blue" block="Blue"
-		Blue = 0x03,
+		Blue = 0x03
     }
 
     export enum Lights {
@@ -832,7 +832,7 @@ namespace microbot {
     }
     
     
-      /**
+    /**
      * Resolve the microbot handle command type, the total of 5 types of commands:Key status,joystick,light & sound & knob,ultrasonic,voltage.
      */
     //% weight=59 blockId=analyzeHandleCmd block="Get handle command type %str"
@@ -850,7 +850,7 @@ namespace microbot {
                 }    
                 let cmdType = parseInt(cmdTypeStr);
 
-                if (cmdType > HandleCmdType.BATTERY || cmdType < 0)
+                if (cmdType > HandleCmdType.BATTERY || cmdType < HandleCmdType.KEY_CHANGE)
                 {
                     return HandleCmdType.NO_COMMAND; 
                 } 
