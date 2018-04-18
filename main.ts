@@ -887,10 +887,10 @@ namespace microbot {
             let startIndex = 5;
             let endIndex = startIndex;
             let valuStr: string;
-            startIndex = str.indexOf("|", startIndex);
+            startIndex =6;// str.indexOf("|", startIndex);
             for (let i = 0; i < index; i++)
             {
-                endIndex = str.indexOf("|", startIndex + 1);
+                endIndex = startIndex + 3;//str.indexOf("|", startIndex + 1);
                 if (endIndex == -1)
                 {
                     return -1;
