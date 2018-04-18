@@ -914,10 +914,12 @@ namespace microbot {
     {
 	 for(let i = startIndex;i < str.length;i++)
 	 {
-	    if(!strFind.compare(str.charAt(i)))
-	    {
-		 return i;
-	    }
+// 	    if(!strFind.compare(str.charAt(i)))
+// 	    {
+// 		 return i;
+// 	    }
+	    if(strFind.length == str.charAt(i).length)
+		    return i;
 	 }
 	 return -1;   
     }
