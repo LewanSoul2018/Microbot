@@ -886,27 +886,28 @@ namespace microbot {
             let startIndex = 5;
             let endIndex = startIndex;
             let valuStr: string="";
-            startIndex = strIndexOf("str","|", startIndex);
+            startIndex = strIndexOf(str,"|", startIndex);
+            		
             for (let i = 0; i < index; i++)
             {
-                endIndex = strIndexOf("str","|", startIndex + 1);
+                endIndex = strIndexOf(str,"|", startIndex + 1);
                 if (endIndex == -1)
                 {
-                    return -2;
+                    return -1;
                 }    
                 valuStr = str.substr(startIndex + 1, endIndex - startIndex - 1);
                 startIndex = endIndex;
             }
             if (!checkArgsInt(valuStr))
             {
-                return -3;
+                return -1;
             } 
             let arg = parseInt(valuStr);
             return arg;
         }     
         else
         {
-            return -4;
+            return -1;
         }  
     }
    
