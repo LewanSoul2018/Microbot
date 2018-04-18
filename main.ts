@@ -912,7 +912,7 @@ namespace microbot {
    
      function strIndexOf(str: string,strFind: string,startIndex: number): number
     {
-	 for(let i = number;i < str.length;i++)
+	 for(let i = startIndex;i < str.length;i++)
 	 {
 	    if(!strFind.compare(str.charAt(i)))
 	    {
