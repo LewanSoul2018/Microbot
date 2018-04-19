@@ -3,7 +3,7 @@
 */
  //% weight=10 icon="\uf013" color=#2896ff
 namespace microbot {
-
+    let handleCmd: string = "";
     export enum Servos {
 		S1 = 0x01,
 		S2 = 0x02,
@@ -830,124 +830,93 @@ namespace microbot {
         cmdStr += "|$";
         return cmdStr;
     }
-    
-    
-    /**
-     * Resolve the microbot handle command type, the total of 5 types of commands:Key status,joystick,light & sound & knob,ultrasonic,voltage.
-     */
-    //% weight=59 blockId=analyzeHandleCmd block="Get handle command type %str"
-    export function analyzeHandleCmd(str: string): number {
-        if (str.length > 9)
-        {
-            let cmdHead = str.substr(0, 3);
-            
-            if (cmdHead == "CMD")
-            {
-                let cmdTypeStr: string = str.substr(4, 2);
-                if (!checkArgsInt(cmdTypeStr))
-                {
-                    return HandleCmdType.NO_COMMAND;
-                }    
-                let cmdType = parseInt(cmdTypeStr);
 
-                if (cmdType > HandleCmdType.BATTERY || cmdType < HandleCmdType.KEY_CHANGE)
-                {
-                    return HandleCmdType.NO_COMMAND; 
-                } 
-                else
-                {
-                    return cmdType;
-                }    
-            }
-            else
-            {
-                return HandleCmdType.NO_COMMAND; 
-            }    
-        }   
-        else
+    /**
+     * Get the handle command.
+     */
+    //% weight=59 blockId=getHandleCmd block="Convert light %cmdStr"
+    export function getHandleCmd(cmdStr: string) {
+        let charStr: string = serial.readString();
+        handleCmd.concat(charStr);
+        if (charStr.compare("$") == 0)
         {
-            return HandleCmdType.NO_COMMAND;
+            let cmd: string = handleCmd.substr(0, handleCmd.length - 1);
+            if (cmd.charAt(0).compare("K"))
+            {
+                let args: string = cmd.substr(1, 1);
+                let argsInt: number = strToNumber(args);
+                if (argsInt == -1)
+                {
+                    handleCmd = "";
+                    return;
+                }    
+                switch (argsInt)
+                {
+                    case 3:
+                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,TOUCHKEY);
+                        break;  
+                        
+                    case 5:
+                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,B1);    
+                        break;    
+
+                    case 7:
+                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,B2);        
+                        break;    
+
+                    case 9:
+                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,B3);       
+                        break;    
+
+                    case 11:
+                         control.raiseEvent(MES_DPAD_CONTROLLER_ID,B4);  
+                        break;    
+
+                    case 13:
+                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,KNOB1);           
+                        break;  
+                        
+                    case 15:
+                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,KNOB2);       
+                        break;    
+
+                    default:
+                        break;    
+                }
+            }   
+            handleCmd = "";
         }    
     }
-    
-     /**
-     * Resolve the parameters that the handle's commands.
-     */
-    //% weight=58  blockId=getHandleArgs block="Get handle command|%str|argument at %index"
-    //% index.min=1 index.max=7
-     export function getHandleArgs(str: string,index: number): number {
-        let cmdType = analyzeHandleCmd(str);
-        if (cmdType == HandleCmdType.NO_COMMAND)
-        {
-            return -1;
-        }    
- 	if (cmdType <= HandleCmdType.BATTERY && cmdType >= HandleCmdType.KEY_CHANGE)
-        {
-            let startIndex = 5;
-            let endIndex = startIndex;
-            let valuStr: string="";
-            startIndex = strIndexOf(str,"|", startIndex);
-            		
-            for (let i = 0; i < index; i++)
-            {
-                endIndex = strIndexOf(str,"|", startIndex + 1);
-                if (endIndex == -1)
-                {
-                    return -1;
-                }    
-                valuStr = str.substr(startIndex + 1, endIndex - startIndex - 1);
-                startIndex = endIndex;
+
+    function strToNumber(str: string): number {
+        if (str.compare("0") >= 0 || str.compare("9") <= 0) {
+            return str.toNumber();
+        }
+        else if (str.compare("A") >= 0 || str.compare("F") <= 0) {
+            if (str.compare("A") == 0) {
+                return 10;
             }
-            if (!checkArgsInt(valuStr))
-            {
-                return -1;
-            } 
-            let arg = parseInt(valuStr);
-            return arg;
-        }     
+            else if (str.compare("B") == 0) {
+                return 11;
+            }
+            else if (str.compare("C") == 0) {
+                return 12;
+            }
+            else if (str.compare("D") == 0) {
+                return 13;
+            }
+            else if (str.compare("E") == 0) {
+                return 14;
+            }
+            else if (str.compare("F") == 0) {
+                return 15;
+            }
+            return -1;  
+        }
         else
-        {
-            return -1;
-        }  
-    }
-   
-     function strIndexOf(str: string,strFind: string,startIndex: number): number
-    {
-	 for(let i = startIndex;i < str.length;i++)
-	 {
-	    if(strFind.compare(str.charAt(i)) == 0)
-	    {
-		 return i;
-	    }
-	 }
-	 return -1;   
+            return -1;    
     }
 
-    /**
-     * Returns the enumeration of the handle command type.
-     */
-    //% weight=57 blockId=getHandleCmdtype block="Handle command type %type"
-    export function getHandleCmdtype(type: HandleCmdType): number {
-        return type;
-    }
-
-    /**
-     * Returns the invalid parameter.
-     */
-    //% weight=56 blockId=getInValidArgs block="Get invalid parameter"
-    export function getInValidArgs(): number {
-        return -1;
-    }
-
-    /**
-     * Returns the enumeration of the key status type.
-     */
-    //% weight=55 blockId=getKeyStatustype block="Key status type %type"
-    export function getKeyStatustype(type: KeyStatusType): number {
-        return type;
-    }
-
-    
     /**
      *  The Melody of Little star   
      */
