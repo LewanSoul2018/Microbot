@@ -9,8 +9,8 @@
     "files": [
         "README.md",
         "main.ts",
-        "RGBLight.ts",
         "main.cpp",
+        "RGBLight.ts",
         "sendbuffer.asm",
         "_locales/zh/microbot-strings.json",
         "_locales/zh/microbot-jsdoc-strings.json"

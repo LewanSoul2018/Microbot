@@ -853,31 +853,31 @@ namespace microbot {
                 switch (argsInt)
                 {
                     case 3:
-                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,TOUCHKEY);
+                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.TOUCHKEY);
                         break;  
                         
                     case 5:
-                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,B1);    
+                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B1);    
                         break;    
 
                     case 7:
-                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,B2);        
+                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B2);        
                         break;    
 
                     case 9:
-                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,B3);       
+                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B3);       
                         break;    
 
                     case 11:
-                         control.raiseEvent(MES_DPAD_CONTROLLER_ID,B4);  
+                         control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B4);  
                         break;    
 
                     case 13:
-                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,KNOB1);           
+                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.KNOB1);           
                         break;  
                         
                     case 15:
-                        control.raiseEvent(MES_DPAD_CONTROLLER_ID,KNOB2);       
+                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.KNOB2);       
                         break;    
 
                     default:
@@ -890,7 +890,7 @@ namespace microbot {
 
     function strToNumber(str: string): number {
         if (str.compare("0") >= 0 || str.compare("9") <= 0) {
-            return str.toNumber();
+            return parseInt(str);
         }
         else if (str.compare("A") >= 0 || str.compare("F") <= 0) {
             if (str.compare("A") == 0) {
