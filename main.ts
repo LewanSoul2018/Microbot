@@ -844,7 +844,7 @@ namespace microbot {
     /**
      * Get the handle command.
      */
-    //% weight=59 blockId=getHandleCmd block="Convert light %cmdStr"
+    //% weight=59 blockId=getHandleCmd block="Get handle command %cmdStr"
     export function getHandleCmd(cmdStr: string) {
         let charStr: string = serial.readString();
         handleCmd.concat(charStr);
@@ -896,6 +896,18 @@ namespace microbot {
             }   
             handleCmd = "";
         }    
+    }
+
+    /**
+     * Do something when a button is pushed down and released again.
+     * @param button the button that needs to be pressed
+     * @param body code to run when event is raised
+     */
+    //% help=input/on-button-pressed weight=58 blockGap=8
+    //% blockId=device_button_event block="on button|%NAME|pressed"
+    //% parts="buttonpair"
+    export function onButtonPressed(button: HandleButton,body: Action) {
+        control.onEvent(MES_DPAD_CONTROLLER_ID, (int)button, body);
     }
 
     function strToNumber(str: string): number {

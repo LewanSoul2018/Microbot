@@ -12,8 +12,10 @@ enum class HandleButton {
     //% block=knob2
     KNOB2 = MES_DPAD_BUTTON_C_DOWN
 };
-
-
+/**
+ * Events and data from sensors
+ */
+ //% weight=10 icon="\uf013" color=#2896ff
 namespace microbot {
     /**
      * Do something when a button is pushed down and released again.
@@ -23,7 +25,7 @@ namespace microbot {
     //% help=input/on-button-pressed weight=58 blockGap=8
     //% blockId=device_button_event block="on button|%NAME|pressed"
     //% parts="buttonpair"
-    void onButtonPressed(HandleButton button, Action body) {
+    export void onButtonPressed(HandleButton button, Action body) {
         registerWithDal(MES_DPAD_CONTROLLER_ID,(int)button, body);
     }
 }
