@@ -9,7 +9,6 @@
     "files": [
         "README.md",
         "main.ts",
-        "main.cpp",
         "RGBLight.ts",
         "sendbuffer.asm",
         "_locales/zh/microbot-strings.json",
