@@ -119,7 +119,7 @@ namespace microbot {
         RELEASE
     }
 
-    enum HandleButton {
+    export enum HandleButton {
         TOUCHKEY = EventBusValue.MES_DPAD_BUTTON_1_DOWN,
         B1 = EventBusValue.MES_DPAD_BUTTON_2_DOWN,
         B2 = EventBusValue.MES_DPAD_BUTTON_3_DOWN,
