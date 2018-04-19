@@ -115,18 +115,18 @@ namespace microbot {
         PRESS,
         //% block="hold"
         HOLD,
-        //% block=""release
+        //% block="release"
         RELEASE
     }
 
     enum HandleButton {
         TOUCHKEY = EventBusValue.MES_DPAD_BUTTON_1_DOWN,
-        B1 = EventBusSource.MES_DPAD_BUTTON_2_DOWN,
-        B2 = EventBusSource.MES_DPAD_BUTTON_3_DOWN,
-        B3 = EventBusSource.MES_DPAD_BUTTON_4_DOWN,
-        B4 = EventBusSource.MES_DPAD_BUTTON_A_DOWN,
-        KNOB1 = EventBusSource.MES_DPAD_BUTTON_B_DOWN,
-        KNOB2 = EventBusSource.MES_DPAD_BUTTON_C_DOWN
+        B1 = EventBusValue.MES_DPAD_BUTTON_2_DOWN,
+        B2 = EventBusValue.MES_DPAD_BUTTON_3_DOWN,
+        B3 = EventBusValue.MES_DPAD_BUTTON_4_DOWN,
+        B4 = EventBusValue.MES_DPAD_BUTTON_A_DOWN,
+        KNOB1 = EventBusValue.MES_DPAD_BUTTON_B_DOWN,
+        KNOB2 = EventBusValue.MES_DPAD_BUTTON_C_DOWN
     };
 
 
