@@ -907,7 +907,7 @@ namespace microbot {
     //% blockId=device_button_event block="on button|%NAME|pressed"
     //% parts="buttonpair"
     export function onButtonPressed(button: HandleButton,body: Action) {
-        control.onEvent(MES_DPAD_CONTROLLER_ID, (int)button, body);
+        control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,button,body);
     }
 
     function strToNumber(str: string): number {
