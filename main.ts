@@ -119,6 +119,16 @@ namespace microbot {
         RELEASE
     }
 
+    enum HandleButton {
+        TOUCHKEY = EventBusValue.MES_DPAD_BUTTON_1_DOWN,
+        B1 = EventBusSource.MES_DPAD_BUTTON_2_DOWN,
+        B2 = EventBusSource.MES_DPAD_BUTTON_3_DOWN,
+        B3 = EventBusSource.MES_DPAD_BUTTON_4_DOWN,
+        B4 = EventBusSource.MES_DPAD_BUTTON_A_DOWN,
+        KNOB1 = EventBusSource.MES_DPAD_BUTTON_B_DOWN,
+        KNOB2 = EventBusSource.MES_DPAD_BUTTON_C_DOWN
+    };
+
 
     let lhRGBLight: RGBLight.LHRGBLight;
 	let R_F: number;
