@@ -903,7 +903,7 @@ namespace microbot {
      * @param button the button that needs to be pressed
      * @param body code to run when event is raised
      */
-    //% weight=58 blockId=onHandleButtonPressed block="on button|%NAME|pressed"
+    //% weight=58 blockId=onHandleButtonPressed block="on button|%button|pressed"
     export function onHandleButtonPressed(button: HandleButton,body: Action) {
         control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,button,body);
     }
