@@ -1111,7 +1111,7 @@ namespace microbot {
                 return -1;    
             if (i > 0)
                 num *= 16;    
-            num += converOneChar(str.charAt(i));
+            num += tmp;
         }    
         return num;
     }
