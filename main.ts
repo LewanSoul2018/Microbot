@@ -869,31 +869,31 @@ namespace microbot {
                 }    
                 switch (argsInt)
                 {
-                    case 3:
+                    case 1:
                         control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.TOUCHKEY);
                         break;  
                         
-                    case 5:
+                    case 3:
                         control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B1);    
                         break;    
 
-                    case 7:
+                    case 5:
                         control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B2);        
                         break;    
 
-                    case 9:
+                    case 7:
                         control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B3);       
                         break;    
 
-                    case 11:
+                    case 9:
                          control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B4);  
                         break;    
 
-                    case 13:
+                    case 11:
                         control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.KNOB1);           
                         break;  
                         
-                    case 15:
+                    case 13:
                         control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.KNOB2);       
                         break;    
 
