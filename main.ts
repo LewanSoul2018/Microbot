@@ -848,7 +848,7 @@ namespace microbot {
     export function getHandleCmd(cmdStr: string) {
         let charStr: string = serial.readString();
         handleCmd.concat(charStr);
-        writeLine(handleCmd);
+        serial.writeLine(handleCmd);
         if (charStr.compare("$") == 0)
         {
             let cmd: string = handleCmd.substr(0, handleCmd.length - 1);
