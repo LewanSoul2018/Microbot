@@ -848,11 +848,11 @@ namespace microbot {
     export function getHandleCmd(cmdStr: string) {
         let charStr: string = serial.readString();
         handleCmd.concat(charStr);
-        
-        if (charStr.compare("$") == 0)
+        let index = findIndexof(handleCmd, "$");
+        if (index != -1)
         {
             serial.writeLine(handleCmd);
-            let cmd: string = handleCmd.substr(0, handleCmd.length - 1);
+            let cmd: string = handleCmd.substr(index - 2,2);
             if (cmd.charAt(0).compare("K") == 0)
             {
                 let args: string = cmd.substr(1, 1);
@@ -899,6 +899,18 @@ namespace microbot {
             }   
             handleCmd = "";
         }    
+    }
+
+    function findIndexof(src: string,strFind: string): number
+    {
+        for (let i = 0; i < src.length; i++)
+        {
+            if (src.charAt(i).compare(strFind) == 0)
+            {
+                return i;
+            }    
+        }  
+        return -1;
     }
 
     /**
