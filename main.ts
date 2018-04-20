@@ -973,7 +973,7 @@ namespace microbot {
                     JoystickX1 = argsInt;
 
                     args = cmd.substr(3, 2);
-                    argsInt: number = strToNumber(args);
+                    argsInt = strToNumber(args);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -982,7 +982,7 @@ namespace microbot {
                     JoystickY1 = argsInt;
 
                     args = cmd.substr(5, 2);
-                    argsInt: number = strToNumber(args);
+                    argsInt = strToNumber(args);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -991,7 +991,7 @@ namespace microbot {
                     JoystickX2 = argsInt;
 
                     args = cmd.substr(7, 2);
-                    argsInt: number = strToNumber(args);
+                    argsInt = strToNumber(args);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -1077,7 +1077,7 @@ namespace microbot {
      */
     //% weight=57 blockId=onHandleSensorReceiveCmd block="on handle sensor|%sensor|receive command"
     export function onHandleSensorReceiveCmd(sensor: HandleSensor,body: Action) {
-        control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,button,body);
+        control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,sensor,body);
     }
 
 
