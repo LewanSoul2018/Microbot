@@ -847,7 +847,7 @@ namespace microbot {
     //% weight=59 blockId=getHandleCmd block="Get handle command %cmdStr"
     export function getHandleCmd(cmdStr: string) {
         let charStr: string = serial.readString();
-        handleCmd.concat(charStr);
+        handleCmd = handleCmd.concat(charStr);
         if (handleCmd.length > 1)
         {
             serial.writeLine(handleCmd);
