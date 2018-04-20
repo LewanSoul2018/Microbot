@@ -71,21 +71,6 @@ namespace microbot {
         //% block="Read firmware version"
         VERSION = 10
     }
-    
-    export enum HandleCmdType {
-        //% block="Invalid command"
-        NO_COMMAND = 0,
-        //% block="key status change"
-        KEY_CHANGE = 11,
-        //% block="joystick"
-        JOYSTICK = 12,
-        //% block="light,sound,knob"
-        LSK = 13,
-        //% block="ultrasonic"
-        ULTRASONIC = 14,
-        //% block="battery"
-        BATTERY = 15
-    }
 
     export enum CarRunCmdType {
         //% block="Stop"
@@ -125,9 +110,32 @@ namespace microbot {
         B2 = EventBusValue.MES_DPAD_BUTTON_3_DOWN,
         B3 = EventBusValue.MES_DPAD_BUTTON_4_DOWN,
         B4 = EventBusValue.MES_DPAD_BUTTON_A_DOWN,
-        KNOB1 = EventBusValue.MES_DPAD_BUTTON_B_DOWN,
-        KNOB2 = EventBusValue.MES_DPAD_BUTTON_C_DOWN
+        JOYSTICK1 = EventBusValue.MES_DPAD_BUTTON_B_DOWN,
+        JOYSTICK2 = EventBusValue.MES_DPAD_BUTTON_C_DOWN
     };
+
+
+    export enum HandleSensor {
+        SOUND = EventBusValue.MES_REMOTE_CONTROL_EVT_FORWARD,
+        LIGHT = EventBusValue.MES_REMOTE_CONTROL_EVT_NEXTTRACK,
+        POWER = EventBusValue.MES_REMOTE_CONTROL_EVT_PAUSE,
+        JOYSTICK = EventBusValue.MES_REMOTE_CONTROL_EVT_PLAY,
+        ULTRASONIC = EventBusValue.MES_REMOTE_CONTROL_EVT_PREVTRACK,
+        KNOB = EventBusValue.MES_REMOTE_CONTROL_EVT_REWIND
+    }
+
+
+    export enum HandleSensorValue {
+        SOUND,
+        LIGHT, 
+        POWER,
+        JOYSTICK_X1,
+        JOYSTICK_Y1,
+        JOYSTICK_X2,
+        JOYSTICK_Y2,
+        ULTRASONIC,
+        KNOB
+    }
 
 
     let lhRGBLight: RGBLight.LHRGBLight;
@@ -841,73 +849,196 @@ namespace microbot {
         return cmdStr;
     }
 
+    let Sound: number = 0;
+    let Light: number = 0;
+    let Power: number = 0;
+    let JoystickX1: number = 0;
+    let JoystickX2: number = 0;
+    let JoystickY1: number = 0;
+    let JoystickY2: number = 0;
+    let UltrasonicValue: number = 0;
+    let Knob: number = 0;
+
     /**
      * Get the handle command.
      */
-    //% weight=59 blockId=getHandleCmd block="Get handle command %cmdStr"
-    export function getHandleCmd(cmdStr: string) {
+    //% weight=59 blockId=getHandleCmd block="Get handle command"
+    export function getHandleCmd() {
         let charStr: string = serial.readString();
         handleCmd = handleCmd.concat(charStr);
         if (handleCmd.length > 1)
         {
             serial.writeLine(handleCmd);
         }    
-        let index = findIndexof(handleCmd, "$");
-        if (index != -1)
+        let cnt: number = countChar(handleCmd, "$");
+        let startIndex: number = 0;
+        for (let i = 0; i < cnt;i++)
         {
-            serial.writeLine(handleCmd);
-            let cmd: string = handleCmd.substr(index - 2,2);
-            if (cmd.charAt(0).compare("K") == 0)
+            let index = findIndexof(handleCmd, "$", startIndex);
+            if (index != -1)
             {
-                let args: string = cmd.substr(1, 1);
-                let argsInt: number = strToNumber(args);
-                serial.writeNumber(argsInt);
-                if (argsInt == -1)
+                let cmd: string = handleCmd.substr(startIndex,index - startIndex);
+                if (cmd.charAt(0).compare("K") == 0 && cmd.length == 2)
                 {
-                    handleCmd = "";
-                    return;
-                }    
-                switch (argsInt)
-                {
-                    case 1:
-                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.TOUCHKEY);
-                        break;  
-                        
-                    case 3:
-                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B1);    
-                        break;    
-
-                    case 5:
-                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B2);        
-                        break;    
-
-                    case 7:
-                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B3);       
-                        break;    
-
-                    case 9:
-                         control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B4);  
-                        break;    
-
-                    case 11:
-                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.KNOB1);           
-                        break;  
-                        
-                    case 13:
-                        control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.KNOB2);       
-                        break;    
-
-                    default:
-                        break;    
+                    let args: string = cmd.substr(1, 1);
+                    let argsInt: number = strToNumber(args);
+                    serial.writeNumber(argsInt);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }    
+                    switch (argsInt)
+                    {
+                        case 1:
+                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.TOUCHKEY);
+                            break;  
+                            
+                        case 3:
+                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B1);    
+                            break;    
+    
+                        case 5:
+                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B2);        
+                            break;    
+    
+                        case 7:
+                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B3);       
+                            break;    
+    
+                        case 9:
+                             control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B4);  
+                            break;    
+    
+                        case 11:
+                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.JOYSTICK1);           
+                            break;  
+                            
+                        case 13:
+                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.JOYSTICK2);       
+                            break;    
+    
+                        default:
+                            break;    
+                    }
                 }
+                else if (cmd.charAt(0).compare("S") == 0 && cmd.length == 3)
+                {
+                    let args: string = cmd.substr(1, 2);
+                    let argsInt: number = strToNumber(args);
+                    serial.writeNumber(argsInt);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    Sound = argsInt;
+                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.SOUND);   
+                }    
+                else if (cmd.charAt(0).compare("L") == 0 && cmd.length == 3)
+                {
+                    let args: string = cmd.substr(1, 2);
+                    let argsInt: number = strToNumber(args);
+                    serial.writeNumber(argsInt);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    Light = argsInt;
+                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.LIGHT);   
+                }    
+                else if (cmd.charAt(0).compare("P") == 0 && cmd.length == 5)
+                {
+                    let args: string = cmd.substr(1, 4);
+                    let argsInt: number = strToNumber(args);
+                    serial.writeNumber(argsInt);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    Power = argsInt;
+                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.POWER);   
+                }    
+                else if (cmd.charAt(0).compare("J") == 0 && cmd.length == 9)
+                {
+                    let args: string = cmd.substr(1, 2);
+                    let argsInt: number = strToNumber(args);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    JoystickX1 = argsInt;
+
+                    args = cmd.substr(3, 2);
+                    argsInt: number = strToNumber(args);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    JoystickY1 = argsInt;
+
+                    args = cmd.substr(5, 2);
+                    argsInt: number = strToNumber(args);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    JoystickX2 = argsInt;
+
+                    args = cmd.substr(7, 2);
+                    argsInt: number = strToNumber(args);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    JoystickY2 = argsInt;
+                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.JOYSTICK);   
+                }  
+                else if (cmd.charAt(0).compare("U") == 0 && cmd.length == 5)
+                {
+                    let args: string = cmd.substr(1, 4);
+                    let argsInt: number = strToNumber(args);
+                    serial.writeNumber(argsInt);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    UltrasonicValue = argsInt;
+                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.ULTRASONIC);   
+                }  
+                else if (cmd.charAt(0).compare("R") == 0 && cmd.length == 3)
+                {
+                    let args: string = cmd.substr(1, 2);
+                    let argsInt: number = strToNumber(args);
+                    serial.writeNumber(argsInt);
+                    if (argsInt == -1)
+                    {
+                        handleCmd = "";
+                        return;
+                    }  
+                    Knob = argsInt;
+                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.KNOB);   
+                }  
+                startIndex = index + 1; 
             }   
+            
+        }    
+        if (cnt > 0)
+        {
             handleCmd = "";
         }    
     }
 
-    function findIndexof(src: string,strFind: string): number
+    function findIndexof(src: string,strFind: string,startIndex: number): number
     {
-        for (let i = 0; i < src.length; i++)
+        for (let i = startIndex; i < src.length; i++)
         {
             if (src.charAt(i).compare(strFind) == 0)
             {
@@ -915,6 +1046,18 @@ namespace microbot {
             }    
         }  
         return -1;
+    }
+
+    function countChar(src: string, strFind: string): number {
+        let cnt: number = 0;
+        for (let i = 0; i < src.length; i++)
+        {
+            if (src.charAt(i).compare(strFind) == 0)
+            {
+                cnt++;
+            }
+        }
+        return cnt;
     }
 
     /**
@@ -927,7 +1070,53 @@ namespace microbot {
         control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,button,body);
     }
 
+    /**
+     * Do something when a handle sensor receive command.
+     * @param sensor the handle sensor that needs to be checked
+     * @param body code to run when event is raised
+     */
+    //% weight=57 blockId=onHandleSensorReceiveCmd block="on handle sensor|%sensor|receive command"
+    export function onHandleSensorReceiveCmd(sensor: HandleSensor,body: Action) {
+        control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,button,body);
+    }
+
+
+    /**
+     * Returns the handle sensor value.
+     */
+    //% weight=56 blockId=getHandleSensorValue block="handle sensor|%type|value"
+    export function getHandleSensorValue(type: HandleSensorValue): number {
+        let value: number = 0;
+        switch (type)
+        {
+            case HandleSensorValue.SOUND: value = Sound; break;
+            case HandleSensorValue.LIGHT: value = Light; break;   
+            case HandleSensorValue.POWER: value = Power; break;       
+            case HandleSensorValue.JOYSTICK_X1: value = JoystickX1; break;      
+            case HandleSensorValue.JOYSTICK_Y1: value = JoystickY1;break;   
+            case HandleSensorValue.JOYSTICK_X2: value = JoystickX2;break;   
+            case HandleSensorValue.JOYSTICK_Y2: value = JoystickY2;break;   
+            case HandleSensorValue.ULTRASONIC: value = UltrasonicValue;break;     
+            case HandleSensorValue.KNOB: value = Knob;break;         
+        }
+        return value;
+    }
+
     function strToNumber(str: string): number {
+        let num: number = 0;
+        for (let i = 0; i < str.length; i++)
+        {
+            let tmp: number = converOneChar(str.charAt(i));
+            if (tmp == -1)
+                return -1;    
+            if (i > 0)
+                num *= 16;    
+            num += converOneChar(str.charAt(i));
+        }    
+        return num;
+    }
+
+    function converOneChar(str: string): number {
         if (str.compare("0") >= 0 || str.compare("9") <= 0) {
             return parseInt(str);
         }
@@ -953,7 +1142,7 @@ namespace microbot {
             return -1;  
         }
         else
-            return -1;    
+            return -1; 
     }
 
     /**
