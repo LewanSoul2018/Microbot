@@ -865,17 +865,17 @@ namespace microbot {
     //% weight=59 blockId=getHandleCmd block="Get handle command"
     export function getHandleCmd() {
         let charStr: string = serial.readString();
-        handleCmd = handleCmd.concat(charStr);
-        if (handleCmd.length > 1) {
-            serial.writeLine(handleCmd);
-        }
-        else
-            return;   
+        // handleCmd = handleCmd.concat(charStr);
+        // if (handleCmd.length > 1) {
+        //     serial.writeLine(handleCmd);
+        // }
+        // else
+        //     return;   
         //let cnt: number = countChar(handleCmd, "$");
         let startIndex: number = 0;
         //if (cnt == 0)
          //   return;  
-        serial.writeString("D1");
+        serial.writeString(charStr);
        
       //  if (cnt > 0)
         {
