@@ -871,13 +871,13 @@ namespace microbot {
         }
         else
             return;   
-        let cnt: number = countChar(handleCmd, "$");
+        //let cnt: number = countChar(handleCmd, "$");
         let startIndex: number = 0;
-        if (cnt == 0)
-            return;  
+        //if (cnt == 0)
+         //   return;  
         serial.writeString("D1");
        
-        if (cnt > 0)
+      //  if (cnt > 0)
         {
             handleCmd = "";
         }    
