@@ -175,6 +175,12 @@
    BaudRate.BaudRate115200);
       initRGBLight();   
       initColorSensor();
+      let buf = pins.createBuffer(4);
+      buf[0] = 0x55;
+      buf[1] = 0x55;
+      buf[2] = 0x02;
+      buf[3] = 0x5A;//cmd type
+      serial.writeBuffer(buf);
 }
 
 /**
@@ -470,8 +476,6 @@
         
      function setMode(mode: number, enable: number) {
          let reg_val = getMode();
-         serial.writeLine("mode:");
-         serial.writeNumber(reg_val);
             /* Change bit(s) in ENABLE register */
         enable = enable & 0x01;
          if (mode >= 0 && mode <= 6)
