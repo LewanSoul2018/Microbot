@@ -31,13 +31,6 @@
         Light2 = 0x01
     }
 
-    export enum SendType {
-        //% block="Set immediately"
-        NoDelaySend = 0x00,
-        //% block="Set delay"
-        DelaySend = 0x01
-    }
-    
     export enum LineFollower {
         //% blockId="S1_OUT_S2_OUT" block="Sensor1 and sensor2 are out black line"
         S1_OUT_S2_OUT = 0x00,
@@ -104,36 +97,59 @@
         RELEASE
     }
 
+
     export enum HandleButton {
+        //% block="Touch key"
         TOUCHKEY = EventBusValue.MES_DPAD_BUTTON_1_DOWN,
+        //% block="B1"
         B1 = EventBusValue.MES_DPAD_BUTTON_2_DOWN,
+        //% block="B2"
         B2 = EventBusValue.MES_DPAD_BUTTON_3_DOWN,
+        //% block="B3"
         B3 = EventBusValue.MES_DPAD_BUTTON_4_DOWN,
+        //% block="B4"
         B4 = EventBusValue.MES_DPAD_BUTTON_A_DOWN,
+        //% block="Left joystick"
         JOYSTICK1 = EventBusValue.MES_DPAD_BUTTON_B_DOWN,
+        //% block="Right joystick"
         JOYSTICK2 = EventBusValue.MES_DPAD_BUTTON_C_DOWN
     }
 
 
     export enum HandleSensor {
+        //% block="Sound"
         SOUND = EventBusValue.MES_REMOTE_CONTROL_EVT_FORWARD,
+        //% block="Light"
         LIGHT = EventBusValue.MES_REMOTE_CONTROL_EVT_NEXTTRACK,
+        //% block="Power"
         POWER = EventBusValue.MES_REMOTE_CONTROL_EVT_PAUSE,
+        //% block="Joystick"
         JOYSTICK = EventBusValue.MES_REMOTE_CONTROL_EVT_PLAY,
+        //% block="Ultrasonic"
         ULTRASONIC = EventBusValue.MES_REMOTE_CONTROL_EVT_PREVTRACK,
+        //% block="konb"
         KNOB = EventBusValue.MES_REMOTE_CONTROL_EVT_REWIND
     }
 
 
     export enum HandleSensorValue {
+        //% block="Sound"
         SOUND,
+        //% block="Light"
         LIGHT, 
+        //% block="Power"
         POWER,
+        //% block="Left joystick X"
         JOYSTICK_X1,
+        //% block="Left joystick Y"
         JOYSTICK_Y1,
+        //% block="Right joystick X"
         JOYSTICK_X2,
+        //% block="Right joystick Y"
         JOYSTICK_Y2,
+        //% block="Ultrasonic"
         ULTRASONIC,
+        //% block="konb"
         KNOB
     }
 
@@ -940,7 +956,7 @@
                         handleCmd = "";
                         return;
                     }  
-                    Light = argsInt;
+                    Light = 255 - argsInt;
                     control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.LIGHT);   
                 }    
                 else if (cmd.charAt(0).compare("P") == 0 && cmd.length == 5)
@@ -1067,7 +1083,7 @@
      * @param sensor the handle sensor that needs to be checked
      * @param body code to run when event is raised
      */
-    //% weight=57 blockId=onHandleSensorReceiveCmd block="on handle sensor|%sensor|receive command"
+    //% weight=57 blockId=onHandleSensorReceiveCmd block="on handle|%sensor|sensor receive command"
     export function onHandleSensorReceiveCmd(sensor: HandleSensor,body: Action) {
         control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,sensor,body);
     }
@@ -1076,7 +1092,7 @@
     /**
      * Returns the handle sensor value.
      */
-    //% weight=56 blockId=getHandleSensorValue block="handle sensor|%type|value"
+    //% weight=56 blockId=getHandleSensorValue block="handle|%type|sensor value"
     export function getHandleSensorValue(type: HandleSensorValue): number {
         let value: number = 0;
         switch (type)
