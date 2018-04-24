@@ -880,47 +880,50 @@
             if (index != -1)
             {
                 let cmd: string = handleCmd.substr(startIndex, index - startIndex);
-                if (cmd.charAt(0).compare("K") == 0 && cmd.length == 2)
+                if (cmd.charAt(0).compare("K") == 0 && cmd.length < 9)
                 {
-                    let args: string = cmd.substr(1, 1);
-                    let argsInt: number = strToNumber(args);
-                    if (argsInt == -1)
+                    for(let j = 0;j < cmd.length - 1;j++)
                     {
-                        handleCmd = "";
-                        return;
-                    }    
-                    switch (argsInt)
-                    {
-                        case 1:
-                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.TOUCHKEY);
-                            break;  
-                            
-                        case 3:
-                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B1);    
-                            break;    
-    
-                        case 5:
-                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B2);        
-                            break;    
-    
-                        case 7:
-                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B3);       
-                            break;    
-    
-                        case 9:
-                             control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B4);  
-                            break;    
-    
-                        case 11:
-                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.JOYSTICK1);           
-                            break;  
-                            
-                        case 13:
-                            control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.JOYSTICK2);       
-                            break;    
-    
-                        default:
-                            break;    
+                        let args: string = cmd.substr(1+j, 1);
+                        let argsInt: number = strToNumber(args);
+                        if (argsInt == -1)
+                        {
+                            handleCmd = "";
+                            return;
+                        }    
+                        switch (argsInt)
+                        {
+                            case 1:
+                                control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.TOUCHKEY);
+                                break;  
+                                
+                            case 3:
+                                control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B1);    
+                                break;    
+        
+                            case 5:
+                                control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B2);        
+                                break;    
+        
+                            case 7:
+                                control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B3);       
+                                break;    
+        
+                            case 9:
+                                 control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.B4);  
+                                break;    
+        
+                            case 11:
+                                control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.JOYSTICK1);           
+                                break;  
+                                
+                            case 13:
+                                control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleButton.JOYSTICK2);       
+                                break;    
+        
+                            default:
+                                break;    
+                        }
                     }
                 }
                 else if (cmd.charAt(0).compare("S") == 0 && cmd.length == 3)
