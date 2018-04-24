@@ -112,7 +112,7 @@ namespace microbot {
         B4 = EventBusValue.MES_DPAD_BUTTON_A_DOWN,
         JOYSTICK1 = EventBusValue.MES_DPAD_BUTTON_B_DOWN,
         JOYSTICK2 = EventBusValue.MES_DPAD_BUTTON_C_DOWN
-    };
+    }
 
 
     export enum HandleSensor {
@@ -126,7 +126,7 @@ namespace microbot {
 
 
     export enum HandleSensorValue {
-        SOUND,
+        SOUND = 0,
         LIGHT, 
         POWER,
         JOYSTICK_X1,
