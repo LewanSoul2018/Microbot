@@ -27,5 +27,6 @@
 	"microbot.getKeyStatustype":"枚举按键状态类型",
 	"microbot.getHandleCmd":"获取手柄命令，一般在循环中一直执行",
 	"microbot.onHandleButtonPressed":"侦测按键手柄按下状态",
-	"microbot.onHandleSensorReceiveCmd":"侦测传感器状态"
+	"microbot.onHandleSensorReceiveCmd":"侦测传感器状态",
+	"microbot.getHandleSensorValue":"返回手柄传感器值"
 }
