@@ -88,7 +88,7 @@
 	"microbot.HandleSensorValue.JOYSTICK_X2|block":"右摇杆X",
 	"microbot.HandleSensorValue.JOYSTICK_Y2|block":"右摇杆Y",
 	"microbot.HandleSensorValue.ULTRASONIC|block":"超声波",
-	"microbot.HandleSensorValue.KNOB|block":"声音",
+	"microbot.HandleSensorValue.KNOB|block":"旋钮",
 	"microbot.getHandleCmd|block":"获取手柄命令",
 	"microbot.onHandleButtonPressed|block":"当手柄按键|%button|按下",
 	"microbot.onHandleSensorReceiveCmd|block":"当手柄|%sensor|传感器接收到命令",
