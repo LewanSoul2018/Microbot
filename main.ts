@@ -933,7 +933,7 @@
                     //serial.writeString("D5");
                     let args: string = cmd.substr(1, 2);
                     let argsInt: number = strToNumber(args);
-                    serial.writeNumber(argsInt);
+                   // serial.writeNumber(argsInt);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -947,7 +947,7 @@
                     //serial.writeString("D6");
                     let args: string = cmd.substr(1, 2);
                     let argsInt: number = strToNumber(args);
-                    serial.writeNumber(argsInt);
+                   // serial.writeNumber(argsInt);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -1130,10 +1130,10 @@
     }
 
     function converOneChar(str: string): number {
-        if (str.compare("0") >= 0 || str.compare("9") <= 0) {
+        if (str.compare("0") >= 0 && str.compare("9") <= 0) {
             return parseInt(str);
         }
-        else if (str.compare("A") >= 0 || str.compare("F") <= 0) {
+        else if (str.compare("A") >= 0 && str.compare("F") <= 0) {
             if (str.compare("A") == 0) {
                 return 10;
             }
