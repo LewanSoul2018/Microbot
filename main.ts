@@ -116,22 +116,6 @@
     }
 
 
-    export enum HandleSensor {
-        //% block="Sound"
-        SOUND = EventBusValue.MES_REMOTE_CONTROL_EVT_FORWARD,
-        //% block="Light"
-        LIGHT = EventBusValue.MES_REMOTE_CONTROL_EVT_NEXTTRACK,
-        //% block="Power"
-        POWER = EventBusValue.MES_REMOTE_CONTROL_EVT_PAUSE,
-        //% block="Joystick"
-        JOYSTICK = EventBusValue.MES_REMOTE_CONTROL_EVT_PLAY,
-        //% block="Ultrasonic"
-        ULTRASONIC = EventBusValue.MES_REMOTE_CONTROL_EVT_PREVTRACK,
-        //% block="konb"
-        KNOB = EventBusValue.MES_REMOTE_CONTROL_EVT_REWIND
-    }
-
-
     export enum HandleSensorValue {
         //% block="Sound"
         SOUND,
@@ -949,7 +933,6 @@
                         return;
                     }  
                     Sound = argsInt;
-                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.SOUND);   
                 }    
                 else if (cmd.charAt(0).compare("L") == 0 && cmd.length == 3)
                 {
@@ -961,7 +944,6 @@
                         return;
                     }  
                     Light = 255 - argsInt;
-                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.LIGHT);   
                 }    
                 else if (cmd.charAt(0).compare("P") == 0 && cmd.length == 5)
                 {
@@ -973,7 +955,6 @@
                         return;
                     }  
                     Power = argsInt;
-                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.POWER);   
                 }    
                 else if (cmd.charAt(0).compare("J") == 0 && cmd.length == 9)
                 {
@@ -1012,7 +993,6 @@
                         return;
                     }  
                     JoystickY2 = argsInt;
-                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.JOYSTICK);   
                 }  
                 else if (cmd.charAt(0).compare("U") == 0 && cmd.length == 5)
                 {
@@ -1024,7 +1004,6 @@
                         return;
                     }  
                     UltrasonicValue = argsInt;
-                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.ULTRASONIC);   
                 }  
                 else if (cmd.charAt(0).compare("R") == 0 && cmd.length == 3)
                 {
@@ -1036,7 +1015,6 @@
                         return;
                     }  
                     Knob = argsInt;
-                    control.raiseEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,HandleSensor.KNOB);   
                 }  
                 startIndex = index + 1; 
             }   
@@ -1083,20 +1061,9 @@
     }
 
     /**
-     * Do something when a handle sensor receive command.
-     * @param sensor the handle sensor that needs to be checked
-     * @param body code to run when event is raised
-     */
-    //% weight=57 blockId=onHandleSensorReceiveCmd block="on handle|%sensor|sensor receive command"
-    export function onHandleSensorReceiveCmd(sensor: HandleSensor,body: Action) {
-        control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID,sensor,body);
-    }
-
-
-    /**
      * Returns the handle sensor value.
      */
-    //% weight=56 blockId=getHandleSensorValue block="handle|%type|sensor value"
+    //% weight=57 blockId=getHandleSensorValue block="handle|%type|sensor value"
     export function getHandleSensorValue(type: HandleSensorValue): number {
         let value: number = 0;
         switch (type)
