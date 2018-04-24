@@ -865,30 +865,21 @@
     //% weight=59 blockId=getHandleCmd block="Get handle command"
     export function getHandleCmd() {
         let charStr: string = serial.readString();
-        handleCmd = handleCmd.concat(charStr);
-        if (handleCmd.length > 1)
-        {
-            serial.writeLine(handleCmd);
-        }    
+        handleCmd = handleCmd.concat(charStr); 
         let cnt: number = countChar(handleCmd, "$");
         let startIndex: number = 0;
         if (cnt == 0)
             return;  
-        //serial.writeString("D1");
         for (let i = 0; i < cnt;i++)
         {
             let index = findIndexof(handleCmd, "$", startIndex);
-            //serial.writeString("D2");
             if (index != -1)
             {
                 let cmd: string = handleCmd.substr(startIndex, index - startIndex);
-                //serial.writeString("D3");
                 if (cmd.charAt(0).compare("K") == 0 && cmd.length == 2)
                 {
-                    //serial.writeString("D4");
                     let args: string = cmd.substr(1, 1);
                     let argsInt: number = strToNumber(args);
-                    serial.writeNumber(argsInt);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -930,10 +921,8 @@
                 }
                 else if (cmd.charAt(0).compare("S") == 0 && cmd.length == 3)
                 {
-                    //serial.writeString("D5");
                     let args: string = cmd.substr(1, 2);
                     let argsInt: number = strToNumber(args);
-                   // serial.writeNumber(argsInt);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -944,10 +933,8 @@
                 }    
                 else if (cmd.charAt(0).compare("L") == 0 && cmd.length == 3)
                 {
-                    //serial.writeString("D6");
                     let args: string = cmd.substr(1, 2);
                     let argsInt: number = strToNumber(args);
-                   // serial.writeNumber(argsInt);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -958,11 +945,8 @@
                 }    
                 else if (cmd.charAt(0).compare("P") == 0 && cmd.length == 5)
                 {
-                    //serial.writeString("D7");
                     let args: string = cmd.substr(1, 4);
-                    serial.writeString(args);
                     let argsInt: number = strToNumber(args);
-                    serial.writeNumber(argsInt);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -973,7 +957,6 @@
                 }    
                 else if (cmd.charAt(0).compare("J") == 0 && cmd.length == 9)
                 {
-                    //serial.writeString("D8");
                     let args: string = cmd.substr(1, 2);
                     let argsInt: number = strToNumber(args);
                     if (argsInt == -1)
@@ -1013,10 +996,8 @@
                 }  
                 else if (cmd.charAt(0).compare("U") == 0 && cmd.length == 5)
                 {
-                    serial.writeString("D9");
                     let args: string = cmd.substr(1, 4);
                     let argsInt: number = strToNumber(args);
-                    serial.writeNumber(argsInt);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
@@ -1027,10 +1008,8 @@
                 }  
                 else if (cmd.charAt(0).compare("R") == 0 && cmd.length == 3)
                 {
-                    //serial.writeString("D10");
                     let args: string = cmd.substr(1, 2);
                     let argsInt: number = strToNumber(args);
-                    serial.writeNumber(argsInt);
                     if (argsInt == -1)
                     {
                         handleCmd = "";
