@@ -960,6 +960,7 @@
                 {
                     //serial.writeString("D7");
                     let args: string = cmd.substr(1, 4);
+                    erial.writeString(args);
                     let argsInt: number = strToNumber(args);
                     serial.writeNumber(argsInt);
                     if (argsInt == -1)
