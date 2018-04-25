@@ -166,6 +166,9 @@
       buf[2] = 0x02;
       buf[3] = 0x5A;//cmd type
       serial.writeBuffer(buf);
+      basic.forever(() => {
+        microbot.getHandleCmd();
+    });	  
 }
 
 /**
@@ -867,8 +870,7 @@
     /**
      * Get the handle command.
      */
-    //% weight=59 blockId=getHandleCmd block="Get handle command"
-    export function getHandleCmd() {
+    function getHandleCmd() {
         let charStr: string = serial.readString();
         handleCmd = handleCmd.concat(charStr); 
         let cnt: number = countChar(handleCmd, "$");
