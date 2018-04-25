@@ -157,8 +157,8 @@
    SerialPin.P12,
    SerialPin.P8,
    BaudRate.BaudRate115200);
-      initRGBLight();   
-      //initColorSensor();
+      //initRGBLight();   
+      initColorSensor();
       let buf = pins.createBuffer(4);
       buf[0] = 0x55;
       buf[1] = 0x55;
