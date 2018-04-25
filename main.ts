@@ -153,8 +153,8 @@
   */
   //% weight=100 blockId=microbotInit block="Initialize Microbot"
   export function microbotInit() {
-      initRGBLight();   
-      initColorSensor();
+      //initRGBLight();   
+      //initColorSensor();
 	serial.redirect(
    	SerialPin.P12,
    	SerialPin.P8,
