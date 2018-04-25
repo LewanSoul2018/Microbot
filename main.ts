@@ -153,12 +153,13 @@
   */
   //% weight=100 blockId=microbotInit block="Initialize Microbot"
   export function microbotInit() {
-	serial.redirect(
-   SerialPin.P12,
-   SerialPin.P8,
-   BaudRate.BaudRate115200);
-      //initRGBLight();   
+      initRGBLight();   
       initColorSensor();
+	serial.redirect(
+   	SerialPin.P12,
+   	SerialPin.P8,
+   	BaudRate.BaudRate115200);
+      control.waitMicros(100);
       let buf = pins.createBuffer(4);
       buf[0] = 0x55;
       buf[1] = 0x55;
