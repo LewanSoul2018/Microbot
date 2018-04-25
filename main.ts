@@ -167,7 +167,7 @@
       buf[3] = 0x5A;//cmd type
       serial.writeBuffer(buf);
       basic.forever(() => {
-        microbot.getHandleCmd();
+        getHandleCmd();
     });	  
 }
 
