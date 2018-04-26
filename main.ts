@@ -971,7 +971,7 @@
                         handleCmd = "";
                         return;
                     }  
-                    JoystickX1 = argsInt;
+                    JoystickX1 = 255 - argsInt;
 
                     args = cmd.substr(3, 2);
                     argsInt = strToNumber(args);
@@ -989,7 +989,7 @@
                         handleCmd = "";
                         return;
                     }  
-                    JoystickX2 = argsInt;
+                    JoystickX2 = 255 - argsInt;
 
                     args = cmd.substr(7, 2);
                     argsInt = strToNumber(args);
