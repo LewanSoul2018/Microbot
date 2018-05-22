@@ -845,12 +845,39 @@
         cmdStr += data.toString();
         cmdStr += "|$";
         return cmdStr;
-    }
-
+     }
+    
+     /**
+      * Control the robot arm draw string at select position range from 0 to 10.
+      */
+     //% weight=59 blockId=robotArmDrawString block="Robot arm draw|%str|at x %position"
+     //% position.min=0 position.max=10
+     export function robotArmDrawString(position: number, str: string)
+     {
+         if (position < 0)
+         {
+             position = 0;
+         }    
+         else if (position > 10)
+         {
+             position = 10;
+         }    
+         let buf = pins.createBuffer(str.length + 5);
+         buf[0] = 0x55;
+         buf[1] = 0x55;
+         buf[2] = (str.length + 3) & 0xff;
+         buf[3] = 0x1A;//cmd type
+         buf[4] = position & 0xff;
+         for (let i = 0; i < str.length; i++)
+         {
+             buf[5 + i] = str.charAt(i);
+         }    
+         serial.writeBuffer(buf);
+     } 
     /**
      *  The Melody of Little star   
      */
-    //% weight=59 blockId=littleStarMelody block="Little star melody"
+    //% weight=58 blockId=littleStarMelody block="Little star melody"
     export function littleStarMelody(): string[] {
         return ["C4:4", "C4:4", "G4:4", "G4:4", "A4:4", "A4:4", "G4:4", "F4:4", "F4:4", "E4:4", "E4:4", "D4:4", "D4:4", "C4:4", "G4:4", "G4:4", "F4:4", "F4:4", "E4:4", "E4:4", "D4:4", "G4:4", "G4:4", "F4:4", "F4:4", "E4:4", "E4:4", "D4:4", "C4:4", "C4:4", "G4:4", "G4:4", "A4:4", "A4:4", "G4:4", "F4:4", "F4:4", "E4:4", "E4:4", "D4:4", "D4:4", "C4:4"];
     }

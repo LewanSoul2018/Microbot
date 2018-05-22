@@ -67,25 +67,5 @@
 	"microbot.convertLight|block":"转换光线命令 %data",
 	"microbot.convertBattery|block":"转换电量命令 %data",
 	"microbot.littleStarMelody|block":"小星星旋律",
-	"microbot.HandleButton.TOUCHKEY|block":"触摸按键",
-	"microbot.HandleButton.B1|block":"B1",
-	"microbot.HandleButton.B2|block":"B2",
-	"microbot.HandleButton.B3|block":"B3",
-	"microbot.HandleButton.B4|block":"B4",
-	"microbot.HandleButton.JOYSTICK1|block":"左摇杆",
-	"microbot.HandleButton.JOYSTICK2|block":"右摇杆",
-	"microbot.HandleSensorValue.SOUND|block":"声音",
-	"microbot.HandleSensorValue.LIGHT|block":"光线",
-	"microbot.HandleSensorValue.POWER|block":"电压",
-	"microbot.HandleSensorValue.JOYSTICK_X1|block":"左摇杆X",
-	"microbot.HandleSensorValue.JOYSTICK_Y1|block":"左摇杆Y",
-	"microbot.HandleSensorValue.JOYSTICK_X2|block":"右摇杆X",
-	"microbot.HandleSensorValue.JOYSTICK_Y2|block":"右摇杆Y",
-	"microbot.HandleSensorValue.ULTRASONIC|block":"超声波",
-	"microbot.HandleSensorValue.KNOB|block":"旋钮",
-	"microbot.getHandleCmd|block":"获取手柄命令",
-	"microbot.onHandleButtonPressed|block":"当手柄按键|%button|按下",
-	"microbot.onHandleSensorReceiveCmd|block":"当手柄|%sensor|传感器接收到命令",
-	"microbot.getHandleSensorValue|block":"手柄|%type|传感器值"
-
+	"microbot.robotArmDrawString|block":"机械臂在x坐标|%position|画字符|%str|"
 }

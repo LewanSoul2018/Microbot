@@ -20,12 +20,5 @@
 	"microbot.convertTemperature":"转换温度值为标准命令，发送到手机端，APP会显示当前温度",
 	"microbot.convertLight":"转换光线值为标准命令，发送到手机端，APP会显示当前光线等级(0~255)",
 	"microbot.littleStarMelody":"小星星旋律",
-	"microbot.analyzeHandleCmd":"解析手柄发送的指令，一共有5中类型:按键指令、摇杆数据、光线声音旋钮、超声波距离、电池电压",
-	"microbot.getHandleArgs":"解析手柄发送的命令参数",
-	"microbot.getHandleCmdtype":"枚举手柄参数类型",
-	"microbot.getInValidArgs":"无效的参数",
-	"microbot.getKeyStatustype":"枚举按键状态类型",
-	"microbot.getHandleCmd":"获取手柄命令，一般在循环中一直执行",
-	"microbot.onHandleButtonPressed":"侦测按键手柄按下状态",
-	"microbot.getHandleSensorValue":"返回手柄传感器值"
+	"microbot.robotArmDrawString":"控制机械臂在指定x坐标画字符串，x坐标范围0到10"
 }
