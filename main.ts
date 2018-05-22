@@ -839,7 +839,7 @@
     /**
      * Convert the light value is the standard command and send it to the mobile phone. The APP displays the current light level (0~255).
      */
-    //% weight=60 blockGap=50 blockId=convertLight block="Convert light %data"
+    //% weight=60 blockId=convertLight block="Convert light %data"
     export function convertLight(data: number): string {
         let cmdStr: string = "CMD|06|";
         cmdStr += data.toString();
@@ -850,7 +850,7 @@
      /**
       * Control the robot arm draw string at select position range from 0 to 10.
       */
-     //% weight=59 blockId=robotArmDrawString block="Robot arm draw|%str|at x %position"
+     //% weight=59 blockGap=50 blockId=robotArmDrawString block="Robot arm draw|%str|at x %position"
      //% position.min=0 position.max=10
      export function robotArmDrawString(position: number, str: string)
      {
