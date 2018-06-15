@@ -146,20 +146,75 @@
 	let G_F: number;
 
 	let b_f: number;
-	let B_F: number;
+     let B_F: number;
+    
+     let handleCmd: string = "";
+     let versionFlag: boolean = false; 
+     let readTimes = 0;
 
 	/**
    * Microbot board initialization, please execute at boot time
   */
   //% weight=100 blockId=microbotInit block="Initialize Microbot"
   export function microbotInit() {
-       serial.redirect(
-   	SerialPin.P12,
-   	SerialPin.P8,
-   	BaudRate.BaudRate115200);
       initRGBLight();   
       initColorSensor();
-}
+      serial.redirect(
+        SerialPin.P12,
+        SerialPin.P8,
+          BaudRate.BaudRate115200);
+          basic.forever(() => {
+            if (readTimes > 10)
+            {
+                return;    
+            }
+            else
+            {
+                readTimes++;
+                sendVersionCmd();
+                control.waitMicros(50);
+                getHandleCmd();
+            }    
+          
+          });	 
+     }
+
+     function sendVersionCmd() {
+        let buf = pins.createBuffer(4);
+        buf[0] = 0x55;
+        buf[1] = 0x55;
+        buf[2] = 0x02;
+        buf[3] = 0x12;//cmd type
+        serial.writeBuffer(buf);
+ }
+     
+    
+  /**
+  * Get the handle command.
+  */
+  
+     function getHandleCmd() {
+         let charStr: string = serial.readString();
+         handleCmd = handleCmd.concat(charStr);  
+         let cnt: number = countChar(handleCmd, "$");
+         if (cnt > 0 && (handleCmd.charAt(0).compare("V") == 0)
+         {
+             versionFlag = true;
+         }    
+  }
+
+  
+  function countChar(src: string, strFind: string): number {
+    let cnt: number = 0;
+    for (let i = 0; i < src.length; i++)
+    {
+        if (src.charAt(i).compare(strFind) == 0)
+        {
+            cnt++;
+        }
+    }
+    return cnt;
+}   
 
 /**
 * Set the angle of servo 1 to 8, range of 0~180 degree
