@@ -197,7 +197,7 @@
          let charStr: string = serial.readString();
          handleCmd = handleCmd.concat(charStr);  
          let cnt: number = countChar(handleCmd, "$");
-         if (cnt > 0 && (handleCmd.charAt(0).compare("V") == 0)
+         if (cnt > 0 && handleCmd.charAt(0).compare("V") == 0)
          {
              versionFlag = true;
          }    
