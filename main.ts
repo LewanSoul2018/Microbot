@@ -279,8 +279,16 @@
         if (speed1 > 100 || speed1 < -100 || speed2 > 100 || speed2 < -100) {
             return;
         }
-        speed1 = speed1 * -1;
-        speed2 = speed2 * -1;
+        if (versionFlag)
+        {
+            speed1 = speed1 * -1;
+            speed2 = speed2 * -1;
+        }    
+        else
+        {
+            speed1 = speed2 * -1;
+            speed2 = speed1 * -1;
+        }   
    let buf = pins.createBuffer(6);
    buf[0] = 0x55;
    buf[1] = 0x55;
