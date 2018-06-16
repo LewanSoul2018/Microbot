@@ -162,12 +162,15 @@
         SerialPin.P12,
         SerialPin.P8,
           BaudRate.BaudRate115200);
+	basic.forever(() => {
+	if(readTimes < 10)
+      		getHandleCmd();
+  	});	  
 	  while(readTimes < 10)
 	  {
 		readTimes++;
                 sendVersionCmd();
                 control.waitMicros(50);
-                getHandleCmd();  
 	  }
      }
 
