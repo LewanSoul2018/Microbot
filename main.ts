@@ -655,7 +655,6 @@
 	export function initColorSensor() {
         InitColor();
 		enableLightSensor(false);
-		control.waitMicros(100);
 	}
 
 	/**
