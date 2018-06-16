@@ -195,6 +195,11 @@
          if (cnt > 0 && handleCmd.charAt(0).compare("V") == 0)
          {
              versionFlag = true;
+	let buf = pins.createBuffer(3);
+        buf[0] = 0x55;
+        buf[1] = 0x55;
+        buf[2] = 0x12;
+        serial.writeBuffer(buf);
          }    
   }
 
