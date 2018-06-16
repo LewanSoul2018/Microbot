@@ -3,7 +3,6 @@
 */
  //% weight=10 icon="\uf013" color=#2896ff
  namespace microbot {
-    let handleCmd: string = "";
     export enum Servos {
 		S1 = 0x01,
 		S2 = 0x02,
