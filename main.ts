@@ -930,7 +930,7 @@
          buf[4] = position & 0xff;
          for (let i = 0; i < str.length; i++)
          {
-             buf[5 + i] = parseInt(str.charAt(i));
+             buf[5 + i] = str.charCodeAt(i);
          }    
          serial.writeBuffer(buf);
      } 
