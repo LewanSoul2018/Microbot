@@ -163,7 +163,7 @@
         SerialPin.P8,
           BaudRate.BaudRate115200);
 	basic.forever(() => {
-	if(readTimes < 10)
+	if(readTimes < 10 && !versionFlag)
       		getHandleCmd();
   	});	  
 	  while(readTimes < 10)
