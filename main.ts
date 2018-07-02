@@ -317,8 +317,8 @@
    control.waitMicros(2);
    // read pulse
    let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
-    basic.pause(25);
-   return d / 58;
+    basic.pause(10);
+    return (d * 100)/5882;
      }
      
 /**
