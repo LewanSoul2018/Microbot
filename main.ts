@@ -170,7 +170,7 @@
 	  {
 		readTimes++;
                 sendVersionCmd();
-                control.waitMicros(50000);
+          basic.pause(50)
 	  }
      }
 
@@ -310,11 +310,11 @@
 		   
    // send pulse
    pins.digitalWritePin(trigPin, 0);
-   control.waitMicros(2000);
+   basic.pause(2)
    pins.digitalWritePin(trigPin, 1);
-   control.waitMicros(10000);
+   basic.pause(10)
    pins.digitalWritePin(trigPin, 0);
-   control.waitMicros(2000);
+   basic.pause(2)
    // read pulse
    let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
    return d / 58;
