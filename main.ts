@@ -927,15 +927,7 @@
       */
      //% weight=59 blockGap=50 blockId=robotArmDrawString block="Robot arm draw %str"
      export function robotArmDrawString(str: string)
-     {
-         if (position < 0)
-         {
-             position = 0;
-         }    
-         else if (position > 10)
-         {
-             position = 10;
-         }    
+     { 
          let buf = pins.createBuffer(str.length + 4);
          buf[0] = 0x55;
          buf[1] = 0x55;
