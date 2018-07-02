@@ -170,7 +170,7 @@
 	  {
 		readTimes++;
                 sendVersionCmd();
-                control.waitMicros(50);
+                control.waitMicros(50000);
 	  }
      }
 
@@ -310,11 +310,11 @@
 		   
    // send pulse
    pins.digitalWritePin(trigPin, 0);
-   control.waitMicros(2);
+   control.waitMicros(2000);
    pins.digitalWritePin(trigPin, 1);
-   control.waitMicros(10);
+   control.waitMicros(10000);
    pins.digitalWritePin(trigPin, 0);
-   control.waitMicros(2);
+   control.waitMicros(2000);
    // read pulse
    let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
    return d / 58;
@@ -923,11 +923,10 @@
      }
     
      /**
-      * Control the robot arm draw string at select position range from 0 to 10.
+      * Control the robot arm draw string
       */
-     //% weight=59 blockGap=50 blockId=robotArmDrawString block="Robot arm draw|%str|at x %position"
-     //% position.min=0 position.max=10
-     export function robotArmDrawString(position: number, str: string)
+     //% weight=59 blockGap=50 blockId=robotArmDrawString block="Robot arm draw %str"
+     export function robotArmDrawString(str: string)
      {
          if (position < 0)
          {
@@ -937,15 +936,14 @@
          {
              position = 10;
          }    
-         let buf = pins.createBuffer(str.length + 5);
+         let buf = pins.createBuffer(str.length + 4);
          buf[0] = 0x55;
          buf[1] = 0x55;
-         buf[2] = (str.length + 3) & 0xff;
-         buf[3] = 0x1A;//cmd type
-         buf[4] = position & 0xff;
+         buf[2] = (str.length + 2) & 0xff;
+         buf[3] = 0x57;//cmd type
          for (let i = 0; i < str.length; i++)
          {
-             buf[5 + i] = str.charCodeAt(i);
+             buf[4 + i] = str.charCodeAt(i);
          }    
          serial.writeBuffer(buf);
      } 
