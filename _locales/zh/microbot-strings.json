@@ -67,5 +67,6 @@
 	"microbot.convertLight|block":"转换光线命令 %data",
 	"microbot.convertBattery|block":"转换电量命令 %data",
 	"microbot.littleStarMelody|block":"小星星旋律",
-	"microbot.robotArmDrawString|block":"机械臂在x坐标|%position|画字符|%str|"
+	"microbot.robotArmDrawString|block":"机械臂在x坐标|%position|画字符|%str|",
+	"microbot.UltrasonicSend|block":"发送超声波测试距离到控制板中"
 }
