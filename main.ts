@@ -310,15 +310,15 @@
 		   
    // send pulse
    pins.digitalWritePin(trigPin, 0);
-   control.waitMicros(2);
+   control.waitMicros(5);
    pins.digitalWritePin(trigPin, 1);
    control.waitMicros(10);
    pins.digitalWritePin(trigPin, 0);
-   control.waitMicros(2);
+   control.waitMicros(5);
    // read pulse
    let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
     basic.pause(10);
-    return d * 99 / 5000;
+    return d / 50;
      }
      
 /**
