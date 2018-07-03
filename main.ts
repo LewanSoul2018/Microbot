@@ -318,7 +318,7 @@
    // read pulse
    let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
     basic.pause(10);
-    return d / 52;
+    return d * 99 / 5000;
      }
      
 /**
