@@ -932,7 +932,7 @@
          let buf = pins.createBuffer(str.length + 5);
          buf[0] = 0x55;
          buf[1] = 0x55;
-         buf[2] = (str.length + 2) & 0xff;
+         buf[2] = (str.length + 3) & 0xff;
          buf[3] = 0x57;//cmd type
 	 buf[4] = str.length & 0xff;    
          for (let i = 0; i < str.length; i++)
