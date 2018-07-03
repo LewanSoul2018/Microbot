@@ -929,14 +929,15 @@
      //% weight=59 blockGap=50 blockId=robotArmDrawString block="Robot arm draw %str"
      export function robotArmDrawString(str: string)
      { 
-         let buf = pins.createBuffer(str.length + 4);
+         let buf = pins.createBuffer(str.length + 5);
          buf[0] = 0x55;
          buf[1] = 0x55;
          buf[2] = (str.length + 2) & 0xff;
          buf[3] = 0x57;//cmd type
+	 buf[4] = str.length & 0xff;    
          for (let i = 0; i < str.length; i++)
          {
-             buf[4 + i] = str.charCodeAt(i);
+             buf[5 + i] = str.charCodeAt(i);
          }    
          serial.writeBuffer(buf);
      } 
