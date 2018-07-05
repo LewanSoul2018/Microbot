@@ -318,7 +318,27 @@
    // read pulse
    let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
     basic.pause(10);
-    return d*10 / 36;
+    return d / 36;
+     }
+   
+  function UltrasonicMs(): number {
+	   //init pins
+   let echoPin:DigitalPin = DigitalPin.P13;
+   let trigPin:DigitalPin = DigitalPin.P14;
+   pins.setPull(echoPin, PinPullMode.PullNone);
+   pins.setPull(trigPin, PinPullMode.PullNone);
+		   
+   // send pulse
+   pins.digitalWritePin(trigPin, 0);
+   control.waitMicros(5);
+   pins.digitalWritePin(trigPin, 1);
+   control.waitMicros(10);
+   pins.digitalWritePin(trigPin, 0);
+   control.waitMicros(5);
+   // read pulse
+   let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
+    basic.pause(10);
+    return d * 10 / 38;
      }
      
 /**
@@ -326,7 +346,7 @@
 */
 //% weight=93 blockId=UltrasonicSend block="Send ultrasonic distance to control board"
     export function UltrasonicSend() {
-        let distance = Ultrasonic();
+        let distance = UltrasonicMs();
         let buf = pins.createBuffer(6);
         buf[0] = 0x55;
         buf[1] = 0x55;
