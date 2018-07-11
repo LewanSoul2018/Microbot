@@ -68,5 +68,18 @@
 	"microbot.convertBattery|block":"转换电量命令 %data",
 	"microbot.littleStarMelody|block":"小星星旋律",
 	"microbot.robotArmDrawString|block":"机械臂画字符 %str",
-	"microbot.UltrasonicSend|block":"发送超声波测试距离到控制板中"
+	"microbot.UltrasonicSend|block":"发送超声波测试距离到控制板中",
+	"microbot.Layer.LAYER_1|block":"第一层",
+	"microbot.Layer.LAYER_2|block":"第二层",
+	"microbot.Layer.LAYER_3|block":"第三层",
+	"microbot.Layer.LAYER_4|block":"第四层",
+	"microbot.ReleaseAngle.ANGLE_0|block":"角度0",
+	"microbot.ReleaseAngle.ANGLE_30|block":"角度30",
+	"microbot.ReleaseAngle.ANGLE_60|block":"角度60",
+	"microbot.ReleaseAngle.ANGLE_90|block":"角度90",
+	"microbot.ReleaseAngle.ANGLE_120|block":"角度120",
+	"microbot.ReleaseAngle.ANGLE_150|block":"角度150",
+	"microbot.ReleaseAngle.ANGLE_180|block":"角度180",
+	"microbot.grapObject|block":"机械臂抓取角度 %angle 层级 %layer",
+	"microbot.releaseObject|block":"机械臂放开角度 %angle 层级 %layer"
 }

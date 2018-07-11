@@ -39,7 +39,35 @@
         S1_IN_S2_OUT = 0x02,
         //% blockId="S1_IN_S2_IN" block="Sensor1 and sensor2 are in black line "
         S1_IN_S2_IN = 0x03
-    }
+     }
+     
+     export enum Layer {
+         //% block="Layer 1"
+         LAYER_1 = 0x00,
+         //% block="Layer 2"
+         LAYER_2 = 0x01,       
+         //% block="Layer 3"
+         LAYER_3 = 0x02,    
+        //% block="Layer 4"
+        LAYER_4 = 0x03    
+     }
+
+     export enum ReleaseAngle {
+         //% block="angle 0"
+         ANGLE_0 = 0,
+         //% block="angle 30"
+         ANGLE_30 = 30,
+         //% block="angle 60"
+         ANGLE_60 = 60,
+         //% block="angle 90"
+         ANGLE_90 = 90,
+        //% block="angle 120"
+        ANGLE_120 = 120,
+        //% block="angle 150"
+         ANGLE_150 = 150,
+        //% block="angle 180"
+        ANGLE_180 = 180
+     }
 
     export enum CmdType {
         //% block="Invalid command"
@@ -370,7 +398,7 @@
     /**
      * Obtain the condition of the tracking sensor
      */
-    //% weight=90 blockGap=50 blockId=readLineStatus block="Line follower status |%status|"
+    //% weight=91 blockId=readLineStatus block="Line follower status |%status|"
     export function readLineFollowerStatus(status: LineFollower): boolean {
         let s1 = pins.digitalReadPin(DigitalPin.P2);
         let s2 = pins.digitalReadPin(DigitalPin.P16);
@@ -383,7 +411,59 @@
         {
             return false;
         }     
+     }
+     
+    /**
+     * Robot arm grap something
+     */
+    //% weight=90 blockId=grapObject block="Robot arm grap angle %angle at %layer"
+    //% angle.min=0 angle.max=240
+     export function grapObject(angle: number, layer: Layer) {
+         let distance = UltrasonicMs();
+         if (angle > 240 || angle < 0)
+         {
+             return; 
+         }    
+         let position = mapRGB(angle, 0, 240, 0, 1000);
+        let buf = pins.createBuffer(10);
+        buf[0] = 0x55;
+        buf[1] = 0x55;
+        buf[2] = 0x08;
+        buf[3] = 0x5A;//cmd type
+        buf[4] = 0x00;
+        buf[5] = distance & 0xff;
+        buf[6] = (distance >> 8) & 0xff;
+        buf[7] = position & 0xff;
+        buf[8] = (position >> 8) & 0xff;
+        buf[9] = layer & 0xff;
+        serial.writeBuffer(buf);
+     }
+
+    /**
+     *  Robot arm release something
+     */
+    //% weight=89 blockGap=50 blockId=releaseObject block="Robot arm release angle %angle at %layer"
+    export function releaseObject(angle: ReleaseAngle, layer: Layer) {
+        let distance = UltrasonicMs();
+        if (angle > 240 || angle < 0)
+        {
+            return; 
+        }    
+        let position = mapRGB(angle, 0, 240, 0, 1000);
+       let buf = pins.createBuffer(10);
+       buf[0] = 0x55;
+       buf[1] = 0x55;
+       buf[2] = 0x08;
+       buf[3] = 0x5A;//cmd type
+       buf[4] = 0x01;
+       buf[5] = distance & 0xff;
+       buf[6] = (distance >> 8) & 0xff;
+       buf[7] = position & 0xff;
+       buf[8] = (position >> 8) & 0xff;
+       buf[9] = layer & 0xff;
+       serial.writeBuffer(buf);
     }
+
 
     /**
 	 * Initialize RGB
