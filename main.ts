@@ -418,7 +418,7 @@
      */
     //% weight=90 blockId=grapObject block="Robot arm grap |angle %angle| at |layer %layer|"
     //% angle.min=0 angle.max=240
-     export function grapObject(angle: number, layer: Layer) {
+     export function grapObject(angle: number, layer: number) {
          let distance = UltrasonicMs();
          if (angle > 240 || angle < 0)
          {
@@ -443,7 +443,7 @@
      *  Robot arm release something
      */
     //% weight=89  blockId=releaseObject block="Robot arm release |angle %angle| at |layer %layer|"
-    export function releaseObject(angle: ReleaseAngle, layer: Layer) {
+    export function releaseObject(angle: number, layer: number) {
         let distance = UltrasonicMs();
         if (angle > 240 || angle < 0)
         {
