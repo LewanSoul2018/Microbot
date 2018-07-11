@@ -398,7 +398,7 @@
     /**
      * Obtain the condition of the tracking sensor
      */
-    //% weight=91 blockId=readLineStatus block="Line follower status |%status|"
+    //% weight=91 blockGap=50  blockId=readLineStatus block="Line follower status |%status|"
     export function readLineFollowerStatus(status: LineFollower): boolean {
         let s1 = pins.digitalReadPin(DigitalPin.P2);
         let s2 = pins.digitalReadPin(DigitalPin.P16);
@@ -416,7 +416,7 @@
     /**
      * Robot arm grap something
      */
-    //% weight=90 blockId=grapObject block="Robot arm grap angle %angle at %layer"
+    //% weight=90 blockId=grapObject block="Robot arm grap |angle %angle| at |layer %layer|"
     //% angle.min=0 angle.max=240
      export function grapObject(angle: number, layer: Layer) {
          let distance = UltrasonicMs();
@@ -442,7 +442,7 @@
     /**
      *  Robot arm release something
      */
-    //% weight=89 blockGap=50 blockId=releaseObject block="Robot arm release angle %angle at %layer"
+    //% weight=89  blockId=releaseObject block="Robot arm release |angle %angle| at |layer %layer|"
     export function releaseObject(angle: ReleaseAngle, layer: Layer) {
         let distance = UltrasonicMs();
         if (angle > 240 || angle < 0)
@@ -464,6 +464,24 @@
        serial.writeBuffer(buf);
     }
 
+          /**
+      * Control the robot arm draw string
+      */
+     //% weight=88 blockGap=50 blockId=robotArmDrawString block="Robot arm draw %str"
+     export function robotArmDrawString(str: string)
+     { 
+         let buf = pins.createBuffer(str.length + 5);
+         buf[0] = 0x55;
+         buf[1] = 0x55;
+         buf[2] = (str.length + 3) & 0xff;
+         buf[3] = 0x57;//cmd type
+	 buf[4] = str.length & 0xff;    
+         for (let i = 0; i < str.length; i++)
+         {
+             buf[5 + i] = str.charCodeAt(i);
+         }    
+         serial.writeBuffer(buf);
+     } 
 
     /**
 	 * Initialize RGB
@@ -1023,24 +1041,6 @@
         return cmdStr;
      }
     
-     /**
-      * Control the robot arm draw string
-      */
-     //% weight=59 blockGap=50 blockId=robotArmDrawString block="Robot arm draw %str"
-     export function robotArmDrawString(str: string)
-     { 
-         let buf = pins.createBuffer(str.length + 5);
-         buf[0] = 0x55;
-         buf[1] = 0x55;
-         buf[2] = (str.length + 3) & 0xff;
-         buf[3] = 0x57;//cmd type
-	 buf[4] = str.length & 0xff;    
-         for (let i = 0; i < str.length; i++)
-         {
-             buf[5 + i] = str.charCodeAt(i);
-         }    
-         serial.writeBuffer(buf);
-     } 
     /**
      *  The Melody of Little star   
      */
