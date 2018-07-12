@@ -413,49 +413,30 @@
         }     
      }
      
-    /**
+      /**
      * Robot arm grap something
      */
-    //% weight=90 blockId=grapObject block="Robot arm grap |angle %angle| at |layer %layer|"
+    //% weight=90 blockId=grapObject block="Robot arm grap|angle %angle| at |layer %layer|"
     //% angle.min=0 angle.max=240
-     export function grapObject(angle: number, layer: number) {
-         let distance = UltrasonicMs();
-         if (angle > 240 || angle < 0)
-         {
-             return; 
-         }    
-         let position = mapRGB(angle, 0, 240, 0, 1000);
-        let buf = pins.createBuffer(10);
-        buf[0] = 0x55;
-        buf[1] = 0x55;
-        buf[2] = 0x08;
-        buf[3] = 0x5A;//cmd type
-        buf[4] = 0x00;
-        buf[5] = distance & 0xff;
-        buf[6] = (distance >> 8) & 0xff;
-        buf[7] = position & 0xff;
-        buf[8] = (position >> 8) & 0xff;
-        buf[9] = layer & 0xff;
-        serial.writeBuffer(buf);
-     }
-
-    /**
-     *  Robot arm release something
-     */
-    //% weight=89  blockId=releaseObject block="Robot arm release |angle %angle| at |layer %layer|"
-    export function releaseObject(angle: number, layer: number) {
+    //% layer.min=0 layer.max=3 
+    export function grapObject(angle: number, layer: number) {
         let distance = UltrasonicMs();
         if (angle > 240 || angle < 0)
         {
             return; 
         }    
         let position = mapRGB(angle, 0, 240, 0, 1000);
+        position += 125;
+        if (position > 1000)
+        {
+            position = 1000;
+            }
        let buf = pins.createBuffer(10);
        buf[0] = 0x55;
        buf[1] = 0x55;
        buf[2] = 0x08;
        buf[3] = 0x5A;//cmd type
-       buf[4] = 0x01;
+       buf[4] = 0x00;
        buf[5] = distance & 0xff;
        buf[6] = (distance >> 8) & 0xff;
        buf[7] = position & 0xff;
@@ -463,6 +444,37 @@
        buf[9] = layer & 0xff;
        serial.writeBuffer(buf);
     }
+
+   /**
+    *  Robot arm release something
+    */
+   //% weight=89  blockId=releaseObject block="Robot arm release|distance(Cm) %distance|angle %angle|at|layer %layer|"
+   //% angle.min=0 angle.max=240
+   //% layer.min=0 layer.max=3  
+   export function releaseObject(distance: number,angle: number, layer: number) {
+       if (angle > 240 || angle < 0)
+       {
+           return; 
+       }    
+       let position = mapRGB(angle, 0, 240, 0, 1000);
+       position += 125;
+       if (position > 1000)
+       {
+           position = 1000;
+       }
+      let buf = pins.createBuffer(10);
+      buf[0] = 0x55;
+      buf[1] = 0x55;
+      buf[2] = 0x08;
+      buf[3] = 0x5A;//cmd type
+      buf[4] = 0x01;
+      buf[5] = distance & 0xff;
+      buf[6] = (distance >> 8) & 0xff;
+      buf[7] = position & 0xff;
+      buf[8] = (position >> 8) & 0xff;
+      buf[9] = layer & 0xff;
+      serial.writeBuffer(buf);
+   }
 
           /**
       * Control the robot arm draw string
