@@ -23,5 +23,6 @@
 	"microbot.robotArmDrawString":"控制机械臂画字符串",
 	"microbot.UltrasonicSend":"发送超声波测试距离到控制板中，控制板获取到距离就可以做出响应",
 	"microbot.grapObject":"控制机械臂抓取物体",
-	"microbot.releaseObject":"控制机械臂放开物体"
+	"microbot.releaseObject":"控制机械臂放开物体",
+	"microbot.grapReady":"机械臂抓取就绪设定，接下来可以做机械臂抓取的操作了"
 }
