@@ -81,5 +81,6 @@
 	"microbot.ReleaseAngle.ANGLE_150|block":"角度150",
 	"microbot.ReleaseAngle.ANGLE_180|block":"角度180",
 	"microbot.grapObject|block":"机械臂抓取|角度 %angle|层级%layer|",
-	"microbot.releaseObject|block":"机械臂放开|距离(厘米) %distance|角度 %angle|层级%layer|"
+	"microbot.releaseObject|block":"机械臂放开|距离(厘米) %distance|角度 %angle|层级%layer|",
+	"microbot.grapReady|block":"机械臂抓取就绪"
 }
