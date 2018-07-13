@@ -412,11 +412,26 @@
             return false;
         }     
      }
+    
+       /**
+     * Robot arm grab is ready
+     */
+    //% weight=90 blockId=grapReady block="Robot arm grab is ready"
+    export function grapReady() {
+       let buf = pins.createBuffer(5);
+       buf[0] = 0x55;
+       buf[1] = 0x55;
+       buf[2] = 0x03;
+       buf[3] = 0x5A;//cmd type
+       buf[4] = 0x02;
+       serial.writeBuffer(buf);
+    }
+    
      
       /**
-     * Robot arm grap something
+     * Robot arm grab something
      */
-    //% weight=90 blockId=grapObject block="Robot arm grap|angle %angle| at |layer %layer|"
+    //% weight=89 blockId=grapObject block="Robot arm grab|angle %angle| at |layer %layer|"
     //% angle.min=0 angle.max=240
     //% layer.min=0 layer.max=3 
     export function grapObject(angle: number, layer: number) {
@@ -448,7 +463,7 @@
    /**
     *  Robot arm release something
     */
-   //% weight=89  blockId=releaseObject block="Robot arm release|distance(Cm) %distance|angle %angle|at|layer %layer|"
+   //% weight=88  blockId=releaseObject block="Robot arm release|distance(Cm) %distance|angle %angle|at|layer %layer|"
    //% angle.min=0 angle.max=240
    //% layer.min=0 layer.max=3  
    export function releaseObject(distance: number,angle: number, layer: number) {
@@ -479,7 +494,7 @@
           /**
       * Control the robot arm draw string
       */
-     //% weight=88 blockGap=50 blockId=robotArmDrawString block="Robot arm draw %str"
+     //% weight=87 blockGap=50 blockId=robotArmDrawString block="Robot arm draw %str"
      export function robotArmDrawString(str: string)
      { 
          let buf = pins.createBuffer(str.length + 5);
