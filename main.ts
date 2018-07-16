@@ -373,7 +373,7 @@
 *  Send ultrasonic distance to control board
 */
 //% weight=93 blockId=UltrasonicSend block="Send ultrasonic distance to control board"
-    export function UltrasonicSend() {
+     function UltrasonicSend() {
         let distance = UltrasonicMs();
         let buf = pins.createBuffer(6);
         buf[0] = 0x55;
