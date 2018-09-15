@@ -11,6 +11,8 @@
         "main.ts",
         "RGBLight.ts",
         "sendbuffer.asm",
+        "_locales/ko/microbot-strings.json",
+        "_locales/ko/microbot-jsdoc-strings.json",
         "_locales/zh/microbot-strings.json",
         "_locales/zh/microbot-jsdoc-strings.json"
     ],
