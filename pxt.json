@@ -1,7 +1,7 @@
 {
     "name": "microbot makBot",
     "version": "0.0.1",
-    "description": "Extension for LewanSoul Microbot",
+    "description": "makBot을 위한 확장 패키지. Extension for LewanSoul Microbot",
     "license": "MIT",
     "dependencies": {
         "core": "*"
