@@ -12,6 +12,6 @@ MIT
 (The metadata above is needed for package search.)
 
 ```package
-microbot=github:LewanSoul2018/Microbot
+microbot=github:old-cookie/Microbot
 ```
 

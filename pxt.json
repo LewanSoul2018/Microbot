@@ -1,6 +1,6 @@
 {
     "name": "microbot",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Extension for LewanSoul Microbot",
     "license": "MIT",
     "dependencies": {
@@ -12,7 +12,9 @@
         "RGBLight.ts",
         "sendbuffer.asm",
         "_locales/zh/microbot-strings.json",
-        "_locales/zh/microbot-jsdoc-strings.json"
+        "_locales/zh/microbot-jsdoc-strings.json",
+        "_locales/zh-TW/microbot-strings.json",
+        "_locales/zh-TW/microbot-jsdoc-strings.json"
     ],
     "testFiles": [
         "test.ts"
